@@ -49,8 +49,11 @@ The crime pattern in Prince George’s County shows that accidents, auto theft, 
 One theory about crime is that it is more likely to occur in the summer months. Test this theory by creating three new columns using `mutate()` that calculate the percentage change compared to the average for each category of crime for the months of June, July, and August. Call the new columns `june_change`, `july_change`, and `august_change`. Assign the result to a new dataframe called `summer_crime_averages`.
 
 ```{r}
-summer_crime_averages <- pg_crime |> 
-  mutate(june_change = (Jun - average_incidents)/average_incidents * 100)
+summer_crime_averages <- pg_crime_averages |> mutate(
+    june_change = ((Jun - average_incidents) / average_incidents) * 100,
+    july_change = ((Jul - average_incidents) / average_incidents) * 100,
+    august_change = ((Aug - average_incidents) / average_incidents) * 100
+  )
 
 ```
 
@@ -58,13 +61,15 @@ summer_crime_averages <- pg_crime |>
 
 Look at the `summer_crime_averages` dataframe by clicking on it in the Environment tab in RStudio. Write a couple of sentences describing the percentage change in the average number of incidents per month for each category of crime for the months of June, July, and August. Do you see any patterns? What does this tell you about the theory that crime is more likely to occur in the summer months?
 
-ANSWER HERE
+The percentage change in the average number of incidents per month for June, July, and August varies across crime categories. Some crimes, such as Robbery - Vehicle and Auto Stolen & Recovered, show large increases in July (64.55% and 42.92%) before decreasing in August. Others, like Breaking & Entering - Residential and Robbery - Other, decline in July and August, contradicting the assumption that crime rises in summer. There are only two categories that had increased incidents in all three summer months: Auto Stolen and Homicide. While some crimes do increase during the summer months, the pattern is not universal across all categories.
 
 ### Task 8: What's the Story?
 
 Write up a lede and nutgraf of a story focused on the crime data in Prince George's County. It could be from any of the dataframes you've created in this assignment. The lede should be a single sentence that summarizes the most important information in the data. The nutgraf should be a paragraph that provides more context and explains why the data is important.
 
-ANSWER HERE
+Vehicle-related crimes, such as accidents, auto theft, and theft from vehicles are the most prevalent in Prince George's County, with significantly higher average monthly incidents compared to crimes against persons.
+
+According to recent crime data, accidents have the highest average number of incidents per month at 481.33, followed by auto theft with 399.17 and theft from autos at 391.92. Crimes against persons are far less common, with homicide averaging 5.83 incidents per month, sex offenses at 12.25 per month, and assault weapon offenses at 14.5 per month. 
 
 ### Task 9: Save Your Work and Put it on GitHub
 
