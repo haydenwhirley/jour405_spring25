@@ -24,7 +24,7 @@ pg_crime <- read_csv("https://raw.githubusercontent.com/dwillis/jour405/refs/hea
 
 You should examine that dataframe carefully by clicking on it in the Environment tab in RStudio. Write a couple of sentences describing the categories of incidents. From a reporting standpoint, are any of the categories more important than others? Why or why not? Do any of them make the job of summarizing the data more difficult? Why or why not?
 
-ANSWER HERE
+I would say that more violent crimes are more of a concern to the PG County community such as homicide and assault shooting. I don't think any of the categories make summarizing the data more difficult because each category seems to have a fairly similar range of incidents throughout the year, without any extreme spikes or drops. Vehicle-related crimes stand out as the most prevalent.
 
 ### Task 4: Calculating Averages
 
