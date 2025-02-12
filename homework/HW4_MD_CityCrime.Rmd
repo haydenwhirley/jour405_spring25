@@ -9,6 +9,8 @@ In this assignment, we will be working with a dataset of total crimes reported b
 You will need to load the tidyverse library and the janitor library
 
 ```{r}
+library(tidyverse)
+library(janitor)
 ```
 
 Then you'll load the data from the web. The URL for the data is: https://raw.githubusercontent.com/dwillis/jour405/refs/heads/main/data/md_cities_crime_2019_2020.csv. You will create a dataframe called `md_cities` that contains the data from this URL.
@@ -16,19 +18,27 @@ Then you'll load the data from the web. The URL for the data is: https://raw.git
 ### Task 2: Load the Data
 
 ```{r}
+md_cities <- read_csv("https://raw.githubusercontent.com/dwillis/jour405/refs/heads/main/data/md_cities_crime_2019_2020.csv")
 ```
+
 ### Task 3: Calculating Rates
 
 Calculate violent and property crime rates for each city for both years using `mutate()`. You'll create four new columns: `violent_rate_2019`, `property_rate_2019`, `violent_rate_2020`, and `property_rate_2020`. You'll need to figure out the proper unit rate, given that there are varying populations. There's no perfect choice; choose the one that works best for you. Save the results to a new dataframe called `md_cities_rates`.
 
 ```{r}
+md_cities_rates <- md_cities |> mutate(
+  violent_rate_2019 = (violent2019/pop2019) * 1000,
+  property_rate_2019 = (property2019/pop2019) * 1000,
+  violent_rate_2020 = (violent2020/pop2020) * 1000,
+  property_rate_2020 = (property2020/pop2020) * 1000
+) 
 ```
 
 ### Task 4: Describe the Rates
 
 Examine the new dataframe, `md_cities_rates`, by clicking on it in the Environment tab in RStudio and sorting by the rate columns. Write a couple of sentences about the results, comparing and contrasting the cities with the highest rates (both violent and property) in 2019 and 2020. Do you see any patterns? What does this tell you about crime in Maryland cities? What's the story here?
 
-ANSWER HERE
+In 2019, Baltimore City had the highest violent crime rate at 18.33 per 1,000 people, while Ocean City had the highest property crime rate at 103.68 per 1,000 people. However, by 2020, Ocean City saw a significant increase in both violent crime rates (23.96) and property crime rates, (121.28) per 1,000 people, now having more violent crimes than Baltimore in 2020. The pattern suggests that Ocean City experienced a unique surge in crime.
 
 
 ### Task 5: Calculate Percentage Change
@@ -36,19 +46,30 @@ ANSWER HERE
 Let's add two percentage change columns to your dataframe: one for violent crime rates and one for property crime rates. You'll calculate the percentage change between 2019 and 2020 for each city. Save the results to a new dataframe called `md_cities_change`.
 
 ```{r}
+md_cities_change <- md_cities_rates |> 
+mutate(
+  violent_change = ((violent_rate_2020 - violent_rate_2019) / violent_rate_2019) * 100,
+  property_change = ((property_rate_2020 - property_rate_2019) / property_rate_2019) * 100
+)
 ```
 
 ### Task 7: Describe Percentage Changes
 
 Look at the `md_cities_change` dataframe by clicking on it in the Environment tab in RStudio. Write a couple of sentences describing the percentage change results. What's more interesting here, the patterns or the outliers? What's the story in the data?
 
-ANSWER HERE
+The percentage change results have some striking outliers. Edmonston in PG County experienced the largest increase in violent crime rates from 2019 to 2020, with a 895% jump. This is a clear outlier, beacuse following that, Poolesville in Montgomery County had the next largest increase at 607%, (almost 300% less of an increase) and then there was a sharp decrease to 300% in Pocomoke City. Beyond that, the increases in violent crime rates seem to follow a more consistent, though still notable, pattern.
+
+Similarly, Crisfield in Somerset County saw the largest increase in property crime rates, with a 320% rise. The next largest increase was 199%, held by Cecilton in Cecil County, with the following cities having smaller and more gradual patterns of increases or decreases.
+
+The story here is that Edmonston and Crisfield saw extreme and unexpected increases in crime rates, which raises the question of what factors contributed to these sudden jumps.
 
 ### Task 8: Tell the Best Story
 
 Write up a lede and nutgraf of a story with the _best_ story idea you've found in this assignment. The lede should be a single sentence that summarizes the most important information in the data. The nutgraf should be a paragraph that provides more context and explains why the data is important.
 
-ANSWER HERE
+Ocean City, Maryland, experienced a surge in both violent and property crime rates in 2020, surpassing Baltimore's violent crime rate for the first time in recent history, despite Baltimore's long-standing reputation as a "Murder Capital of America."
+
+Ocean City witnessed an unexpected spike in crime in 2020. While Baltimore City has long struggled with high violent crime rates, including frequent homicides, Ocean City’s violent crime rate surpassed Baltimore’s in 2020 becoming the highest in the state. Baltimore's violent crime rate, which stood at 18.33 per 1,000 people in 2019, dropped to 15.97 in 2020, while Ocean City’s violent crime rate surged from 13.10 per 1,000 in 2019 to 23.96 in 2020. Additionally, Ocean City’s property crime rate spiked from 103.68 to 121.28 per 1,000 people, notably making it the city in Maryland with the highest property crime rates in both years. This sharp rise in crime in Ocean City raises questions about the underlying causes of this shift, especially since this popular travel destination saw such an increase in crime during the COVID-19 pandemic when fewer people were traveling.
 
 ### Task 9: Save Your Work and Put it on GitHub
 
