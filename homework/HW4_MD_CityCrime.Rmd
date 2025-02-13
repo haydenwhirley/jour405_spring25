@@ -74,3 +74,28 @@ Ocean City witnessed an unexpected spike in crime in 2020. While Baltimore City 
 ### Task 9: Save Your Work and Put it on GitHub
 
 Save this notebook, then commit it to your local repository. Push the changes to your GitHub repository and submit the URL for this file in ELMS.
+
+### Task 10: Homework 5
+
+Using the 2020 violent crime rate, calculate the percentiles using `ntile()`. Save the results to a new dataframe called `md_cities_percentiles`. How many cities are above the 90th percentile?
+
+```{r}
+md_cities_percentiles <- md_cities_change |>
+  mutate(percentile_violent_rate_2020 = ntile(violent_rate_2020, 100))
+```
+11 cities are above the 90th percentile.
+
+Calculate the Interquartile Range of the 2020 violent crime rate using `summarize()` and R's `IQR()` function. The syntax is similar to how `mean()` works.
+
+```{r}
+md_cities_percentiles |> 
+    summarize(IQR_violent_rate_2020 = IQR(violent_rate_2020))
+```
+
+Do the results change your best story idea from the previous assignment? Why or why not?
+
+The results do not significantly change my story idea, but they do provide additional context and reinforce the same points. 
+
+Knowing that 11 cities out of the 137 were above the 90th percentile confirms that only a small group of places experienced unusually high violent crime rates, but it emphasizes those significant jumps in crime compared to most other cities in Maryland were extreme. Ocean City (100th percentile) & Baltimore (99th percentile) are among these.
+
+The IQR of 4.19 suggests that the middle 50% of Maryland cities had relatively moderate changes in violent crime rates. Ocean City's violent crime rate (23.96 per 1,000 people) is far beyond this range, reinforcing the idea that its spike in crime was an extreme outlier.
