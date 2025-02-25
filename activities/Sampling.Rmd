@@ -5,24 +5,46 @@ title: "Sampling"
 Follow along with the demo to learn how to sample data from a population using R and the Tidyverse. You should get started by loading the tidyverse in a new R block.
 
 ### Task 1: Load the tidyverse
-
+```{r}
+library(tidyverse)
+```
 
 ### Task 2: Load 1,000 rows of data with the ages of people from 18-80
-
+```{r}
+set.seed(42) # Setting seed for reproduceability
+population <- tibble(
+  age=sample(18:80,1000, replace = TRUE)
+)
+head(population)
+```
 
 ### Task 3: Sample 100 rows of data from the dataset
+```{r}
+sample_100 <- population |>
+  sample_n(100)
 
+sample_50 <- population |>
+  sample_n(50)
+
+sample_10 <- population |>
+  sample_n(10)
+```
 
 ### Task 4: Calculate the mean age and standard deviation of the sample
-
+```{r}
+sample_100 |> summarize(mean = mean(age), sd = sd(age))
+```
 
 ### Task 5: Calculate the mean age and standard deviation of the population
-
+```{r}
+population |>  summarize(mean = mean(age), sd = sd(age))
+```
 
 ### Task 6: Compare the sample and population statistics
 
 Compare the means and standard deviations. Are they similar? Go back and re-run the sampling and statistics calculations with a smaller sample size. How do the results change?
 
+I found from this that no matter the random sample size of a population, the mean and standard deviation tend to be roughly the same. As long as the sample is randomly selected, it can provide a fairly accurate estimate of the population characteristics. In this case, the mean and standard deviation of a sample of 100 people from the population was fairly close to the same data from the total population.
 
 
 When finished, save your work, switch to GitHub Desktop, then add, commit and push your changes to GitHub and submit the URL of the notebook in ELMS.
