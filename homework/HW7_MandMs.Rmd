@@ -5,27 +5,71 @@ title: "HW7_MandMs"
 In this assignment, you'll be picking up where you left off with the M&Ms activity. You'll load the data and perform some basic statistical analysis. Follow the steps below to complete the assignment.
 
 ### Task 1: Load the tidyverse
-
+```{r}
+library(tidyverse)
+```
 
 ### Task 2: Load the M&Ms dataset from https://raw.githubusercontent.com/dwillis/jour405/refs/heads/main/data/mandms.csv
+```{r}
+MandMs <- read_csv("https://raw.githubusercontent.com/dwillis/jour405/refs/heads/main/data/mandms.csv")
+```
+
+### Task 3: Sample 5 rows of data from the dataset, and then sample 10 rows, saving each to separate dataframes called sample5 and sample10. Be sure to use set.seed(1234) before you start.
+```{r}
+set.seed(1234) # Setting seed for reproduceability
+
+sample5 <- MandMs |>
+  sample_n(5)
+
+sample10 <- MandMs |>
+  sample_n(10)
+```
 
 
-### Task 3: Sample 5 rows of data from the dataset
+### Task 4: Calculate the mean and standard deviation of the two samples, using one of the colors.
+```{r}
+sample5 |> summarize(mean = mean(red), sd = sd(red))
+
+sample10 |> summarize(mean = mean(red), sd = sd(red))
+```
 
 
-### Task 4: Calculate the mean age and standard deviation of the sample, using either the blue or white number of M&Ms
+### Task 5: Calculate the mean and standard deviation of the original dataset, using the same color as Task 4
+```{r}
+MandMs |> summarize(mean = mean(red), sd = sd(red))
+```
 
+### Task 6: Make three histograms: one each for sample5, sample10 and the original dataset. Use a consistent binwidth.
+```{r}
+sample5 |>
+  ggplot() + 
+  geom_histogram(aes(x = red), binwidth = 2)
+  
+sample10 |>
+  ggplot() + 
+  geom_histogram(aes(x = red), binwidth = 2)
 
-### Task 5: Calculate the mean age and standard deviation of the population, using the same measure as in Task 4
+MandMs |>
+  ggplot() + 
+  geom_histogram(aes(x = red), binwidth = 2)
+```
 
+### Task 7: Answer some questions
 
-### Task 6: Compare the sample and population statistics
+Compare the three sets of means, standard deviations and histograms. Which are more helpful to you in understanding the accuracy of the samples?
 
-Compare the two sets of means and standard deviations. Are they similar?
+The original dataset does not look perfectly normal, as there are fluctuating values. The histogram shows noticeable variation rather than a smooth bell curve. The samples look even less normal. The means are very close across all three sets only about 2 values off, but the standard deviation decreases from 16, 14, and 10. I think the standard deviation is pretty helpful in understanding the accuracy of the samples because it shows how much variation exists, with lower values indicating more reliable estimates.
 
-### Task 7: Describe the results
+What does this exercise tell you about the relationship between sample size and estimate accuracy?
 
-Write a few sentences about what you found in the data. What does this tell you about the M&Ms dataset and about the act of random sampling?
+Small sample sizes can cause larger fluctuations in the mean and standard deviation, as seen here, where the values are more spread out and is obvious in the histograms. This shows that while smaller samples may have more fluctuations, larger sample sizes can reduce random errors and lead to more consistent estimates, but samples can still reflect the broader variability of the entire population.
 
+How does random sampling introduce variation into statistical estimates?
+
+Because random sampling selects different subsets of data, each sample may contain slightly different proportions of red and black M&Ms. Smaller samples tend to show more variation, while larger samples reduce this effect by averaging out extreme values.
+
+If you repeated this process, would the samples always be identical? Why or why not?
+
+I don't think the samples would be identical because each time a sample is drawn, different groups of M&Ms may be included, leading to slight differences in mean and standard deviation. 
 
 When finished, save your work, switch to GitHub Desktop, then add, commit and push your changes to GitHub and submit the URL of the notebook in ELMS.
