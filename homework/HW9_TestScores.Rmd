@@ -1,6 +1,6 @@
 ---
 title: "HW9_TestScores"
-name: REPLACE WITH YOUR NAME
+name: Hayden Whirley
 ---
 
 ```{r setup, include=FALSE}
@@ -25,8 +25,8 @@ Before you can run this codeblock, you will need to fill in a value where it say
 
 ```{r}
 # Known information about reading scores before the new program
-prior_mean <- REPLACE_ME  # average score
-prior_sd <- REPLACE_ME     # standard deviation
+prior_mean <- 72.6  # average score
+prior_sd <- 4.8     # standard deviation
 
 # Reading scores after implementing the new program (12 classrooms)
 new_scores <- c(74, 76, 73, 75, 78, 77, 74, 79, 75, 76, 77, 75) # Replace with the actual scores
@@ -44,6 +44,7 @@ score_data
 ### Reflection Question 1:
 Based on just looking at the score_data dataframe, have test scores improved? How can you tell?
 
+Yes text scores have improved beacuse they are all above the prior average of 72.6.
 
 ## Task 2: Calculate key statistics
 
@@ -54,8 +55,8 @@ Like Task 1, you will need to replace values where it says REPLACE_ME before run
 # Calculate statistics based on the new reading scores
 new_stats <- score_data |> 
   summarise(
-    mean = mean(REPLACE_ME),
-    sd = sd(REPLACE_ME),
+    mean = mean(reading_score),
+    sd = sd(reading_score),
     n = n()
   )
 
@@ -65,7 +66,7 @@ new_stats
 ### Reflection Question 2:
 Looking at the mean and standard deviation of the new scores compared to the previous statistics, what initial observations can you make? What questions might these statistics raise for your reporting?
 
-
+The mean increased by 3.15, and the standard deviation varies less, decreasing from 4.8 to 1.76, indicating that the new scores are more consistent and clustered closer to the mean. The increase in the mean suggests an overall improvement in scores. The decrease in standard deviation indicates that the scores are less spread out, so there is less variability among them. Some questions I would raise would be with a smaller standard deviation, are the new scores truly representative of all third-grade students in the district, or could the sample size and selection of classrooms have influenced the results? 
 
 ## Task 3: Create a column chart
 
@@ -74,7 +75,7 @@ As before, replace any values marked REPLACE_ME based the instructions.
 
 ```{r}
 # STUDENT TASK: Choose an appropriate fill color for the bars
-my_fill_color <- "REPLACE_ME" # Replace with a color name like "royalblue", "darkgreen", etc.
+my_fill_color <- "royalblue" # Replace with a color name like "royalblue", "darkgreen", etc.
 
 # Create a visualization comparing new scores to the previous average
 score_data |> 
@@ -101,17 +102,19 @@ ggplot(aes(x = classroom, y = reading_score)) +
 ### Reflection Question 3:
 Examine the chart you created, and suggest a better title based on the results of the data, not a description.
 
+I think a better title would be "Third-grade reading scores after implementation of new reading program"
+
 ## Task 4: Perform a hypothesis test
 
 This is where we formally test the superintendent's claim that reading scores have improved. Fill in the REPLACE_ME values as needed, beginning with your hypotheses.
 
 **Hypotheses:**
-Null: The new reading program REPLACE_ME
-Alternative: The new reading program REPLACE_ME
+Null: The new reading program has not improved reading scores
+Alternative: The new reading program has improved reading scores
 
 ```{r}
 # Set the significance level for your test
-alpha_level <- REPLACE_ME # Replace with the appropriate value
+alpha_level <- 0.05 # Replace with the appropriate value
 
 # Perform a one-sample t-test
 # Since we want to know if scores improved (increased), we use a one-sided test (alternative = "greater")
