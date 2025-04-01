@@ -4,6 +4,8 @@ date: "2025-04-01"
 ---
 
 ```{r setup, include=FALSE}
+library(knitr)
+library(kableExtra)
 knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
 library(tidyverse)
 ```
@@ -228,6 +230,12 @@ kable(comparison, digits = 1, caption = "Difference Between Weighted and Unweigh
 
 1. Which voter category shows the biggest difference between weighted and unweighted results?
 
+The people who say they rarely/never vote.
+
 2. How might these differences affect reporting on likely voter turnout?
 
+These differences could make reports on voter turnout less accurate. If unweighted results are used, it might look like more "rarely/never" voters will turn out than they actually will, or vice versa like examples of Trump winning PA, more voters turned out than expected. Since weighting adjusts the data to better match real voter behavior, using unweighted numbers could give a false picture of who is most likely to vote, leading to incorrect predictions about election results.
+
 3. Why do you think these differences exist? What does this tell us about who might be over or under-represented in the sample?
+
+These differences happen because polls need to adjust their data to better reflect the real population. People who rarely or never vote might be underrepresented in the unweighted data, maybe because they’re more unlikely to answer surveys. Weighting helps fix this by making sure the results better match the actual voting population. This tells us that without adjustments, the poll might give too much importance to groups that don’t usually vote.
