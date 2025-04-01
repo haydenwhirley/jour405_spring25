@@ -113,7 +113,9 @@ ggplot(aes(x = month, y = total)) +
 
 - Propose a headline about the trend in car thefts that is focused on the present and future, but informed by the data you see above.
 
-PUT YOUR ANSWERS HERE.
+The 95% confidence interval indicates the range we are 95% confident the true average number of car thefts lies in for the entire period.
+The mean and the confidence interval (the shaded red area), accurately represents the typical number of car thefts per month. It shows the expected range where most of the monthly totals fall. 
+I think a headline for this data could be ""
 
 
 ### Task 7: Is the recent trend significant?
@@ -141,7 +143,7 @@ t_test_periods
 period_summary <- car_thefts |> 
   group_by(period) |> 
   summarize(
-    mean_thefts = mean(REPLACE_ME),
+    mean_thefts = mean(total),
     sd_thefts = sd(total),
     months = n(),
     se_thefts = sd_thefts / sqrt(months),
