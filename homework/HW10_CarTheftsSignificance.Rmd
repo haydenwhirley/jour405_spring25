@@ -1,6 +1,6 @@
 ---
 title: "Car Thefts Significance"
-name: REPLACE WITH YOUR NAME
+name: Hayden Whirley
 ---
 
 Your editor wants to know if there have been recent changes in the number of car thefts in Prince George's County. Using monthly figures and significance testing, you'll come up with an answer and decide whether there's a story here. As with the previous homework, provide answers in this notebook when prompted and you will have to fill in values where you see REPLACE_ME. Get started by loading the tidyverse in a new R block.
@@ -10,6 +10,7 @@ Your editor wants to know if there have been recent changes in the number of car
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 # LOAD THE TIDYVERSE
+library(tidyverse)
 ```
 
 
@@ -30,7 +31,7 @@ glimpse(car_thefts)
 
 We'll make a line chart using geom_line() to try and illustrate any trend over time. What's your initial reaction to the change in car thefts? Is there a trend?
 
-PUT ANSWERS HERE
+I would say it has decreased since the initial 673 in July 2023, none have been that high since. But it seems like the values fluctuate from then on. 
 
 ```{r}
 
@@ -61,7 +62,7 @@ Let's add some stats to that process - mean and standard deviation - and calcula
 theft_summary <- car_thefts |> 
   summarize(
     mean_thefts = mean(total),
-    sd_thefts = sd(REPLACE_ME),
+    sd_thefts = sd(total),
     months = n(),
     se_thefts = sd_thefts / sqrt(months),
     margin_error = qt(0.975, df = months - 1) * se_thefts,  # Using t-distribution for small sample
@@ -80,7 +81,7 @@ theft_summary
 
 Let's make a better chart showing the changes and the statistics we produced in Task 4. Does this change anything about your answer from Task 3?
 
-
+It does change my answer, it looks like car thefts did decrease overall, just not declining steadily.
 
 ```{r}
 # Make a better chart
@@ -107,7 +108,9 @@ ggplot(aes(x = month, y = total)) +
 ### Task 6: Describe the confidence interval.
 
 - What does the 95% confidence interval show here?
+
 - What figure(s) accurately reflects the number of car thefts in a typical month?
+
 - Propose a headline about the trend in car thefts that is focused on the present and future, but informed by the data you see above.
 
 PUT YOUR ANSWERS HERE.

@@ -44,7 +44,7 @@ score_data
 ### Reflection Question 1:
 Based on just looking at the score_data dataframe, have test scores improved? How can you tell?
 
-Yes text scores have improved beacuse they are all above the prior average of 72.6.
+Yes text scores have improved because they are all above the prior average of 72.6.
 
 ## Task 2: Calculate key statistics
 
@@ -109,8 +109,8 @@ I think a better title would be "Third-grade reading scores after implementation
 This is where we formally test the superintendent's claim that reading scores have improved. Fill in the REPLACE_ME values as needed, beginning with your hypotheses.
 
 **Hypotheses:**
-Null: The new reading program has not improved reading scores
-Alternative: The new reading program has improved reading scores
+Null: The new reading program has no effect on third-grade reading scores
+Alternative: The new reading program has improved third-grade reading scores
 
 ```{r}
 # Set the significance level for your test
@@ -131,7 +131,9 @@ t_test_result
 ### Reflection Question 4:
 What does the p-value tell you, and what doesn't it tell you? How would you explain these results to a non-technical audience while maintaining accuracy?
 
-
+This p-value is extremely small, much smaller than the chosen significance level of 0.05. This means that there is strong statistical evidence that the new reading program has led to an improvement in test scores. We reject the null hypothesis and conclude that the program likely had a positive effect.
+It doesn't tell me why the scores improved, whether the program will work for all students, or how much of a real-world impact the improvement has.
+I would explain these results by saying that students' reading scores increased after the new program, and the chance of this happening randomly is very low, suggesting the program likely helped.
 
 ## Task 5: Interpreting the results for your news story
 
@@ -148,7 +150,7 @@ ci <- t.test(score_data$reading_score)$conf.int
 # Create a tibble to display the key statistics for your story
 story_stats <- tibble(
   `Previous average` = prior_mean,
-  `New average` = mean(REPLACE_ME),
+  `New average` = mean(score_data$reading_score),
   `Improvement` = mean(new_scores) - prior_mean,
   `Percent change` = round(((mean(new_scores) - prior_mean) / prior_mean) * 100, 1),
   `p-value` = p_value,
@@ -166,6 +168,14 @@ story_stats
 ### Reflection Question 5:
 Based on these statistics, what would be your headline and lead paragraph for this story? Is there evidence to support the superintendent's claim?
 
+"Study Shows New Reading Program Boosts Third-Grade Scores"
+
+A new reading program implemented in the district has led to a statistically significant increase in third-grade reading scores, according to recent data. The average test score improved by 3.15 points, from 72.6 to 75.75, with the results showing a 4.3% increase. A t-test analysis showed a p-value of 3.43e-05, providing strong evidence that the program contributed to the improvement. The 95% confidence interval for the new scores ranges from 74.63 to 76.87, suggesting that the observed improvement is unlikely to have occurred by chance.
+
+There is strong evidence to support the superintendent's claim largely due to the p-value. It is much smaller than the typical significance level of 0.05. This indicates that the improvement is not due to random chance.
+
 
 ### Reflection Question 6:
 What metrics or outcomes beyond test scores might be important to track for assessing reading performance?
+
+I think some other important ways to track reading performance would be evaluating accuracy and fluency of words read in a certain amount of time (a minute) or through reading comprehension summaries or discussions. I think this could be more accurate than answering test questions because this requires students to actively engage with the material rather than just selecting an answer. Test scores may be inaccurate because students can guess, lack effort, run out of time etc.
