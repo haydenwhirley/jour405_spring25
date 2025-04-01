@@ -172,7 +172,7 @@ Based on these statistics, what would be your headline and lead paragraph for th
 
 A new reading program implemented in the district has led to a statistically significant increase in third-grade reading scores, according to recent data. The average test score improved by 3.15 points, from 72.6 to 75.75, with the results showing a 4.3% increase. A t-test analysis showed a p-value of 3.43e-05, providing strong evidence that the program contributed to the improvement. The 95% confidence interval for the new scores ranges from 74.63 to 76.87, suggesting that the observed improvement is unlikely to have occurred by chance.
 
-There is strong evidence to support the superintendent's claim largely due to the p-value. It is much smaller than the typical significance level of 0.05. This indicates that the improvement is not due to random chance.
+There is strong evidence to support the superintendent's claim largely due to the p-value. It is much smaller than the typical significance level of 0.05. This shows that the improvement is not due to random chance.
 
 
 ### Reflection Question 6:
