@@ -115,7 +115,7 @@ ggplot(aes(x = month, y = total)) +
 
 The 95% confidence interval indicates the range we are 95% confident the true average number of car thefts lies in for the entire period.
 The mean and the confidence interval (the shaded red area), accurately represents the typical number of car thefts per month. It shows the expected range where most of the monthly totals fall. 
-I think a headline for this data could be ""
+I think a headline for this data could be "Car Theft Numbers Drop Significantly from 2023 to 2025, Despite Fluctuations in the Middle Months."
 
 
 ### Task 7: Is the recent trend significant?
@@ -147,7 +147,7 @@ period_summary <- car_thefts |>
     sd_thefts = sd(total),
     months = n(),
     se_thefts = sd_thefts / sqrt(months),
-    margin_error = qt(0.975, df = REPLACE_ME - 1) * se_thefts, # look at how we calculated this above
+    margin_error = qt(0.975, df = months - 1) * se_thefts, # look at how we calculated this above
     ci_lower = mean_thefts - margin_error,
     ci_upper = mean_thefts + margin_error
   )
@@ -172,6 +172,8 @@ ggplot(aes(x = period, y = mean_thefts, fill = period)) +
 ### Task 8: Reflection
 
 Given the above chart, is the difference between the two periods statistically significant? Can we reject the null hypothesis?
+
+I at first would've said the difference is statistically significant, the mean decreased by about 60. But looking at the p-value of 0.176, the difference between the two periods wouldn't actually be statistically significant. Since the p-value is greater than 0.05, we fail to reject the null hypothesis, which means we do not have strong enough evidence to conclude that the decrease in car thefts is due to a real trend rather than random variation.
 
 How would you revise your headline from Task 6, if at all? What would you tell your editor, and what would you expect her to ask you?
 
