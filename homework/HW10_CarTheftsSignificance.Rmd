@@ -74,9 +74,6 @@ theft_summary <- car_thefts |>
 theft_summary
 ```
 
-
-
-
 ### Task 5: Visualize the data
 
 Let's make a better chart showing the changes and the statistics we produced in Task 4. Does this change anything about your answer from Task 3?
@@ -177,8 +174,7 @@ I at first would've said the difference is statistically significant, the mean d
 
 How would you revise your headline from Task 6, if at all? What would you tell your editor, and what would you expect her to ask you?
 
-PUT ANSWERS HERE
-
+I possible headline could be "Recent Dip in Car Thefts May Not Be Part of a Lasting Trend, Data Shows" I would tell my editor that while the data suggests car thefts have decreased in recent months, statistical testing shows the change isn’t significant at the 95% confidence level. That means we can't confidently say the drop is part of a consistent or meaningful trend—yet. I would excpet her to ask me “Could the sample size or time period be affecting the result?” or “Are there other indicators or patterns we should look at?”
 
 
 When you are finished, add, commit and push your notebook and submit the URL in ELMS.
