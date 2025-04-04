@@ -1,6 +1,6 @@
 ---
 title: "HW11: Education Level and Survey Weighting"
-author: "Your Name Here"
+author: Hayden Whirley
 ---
 
 ```{r setup, include=FALSE}
@@ -231,6 +231,7 @@ YOUR ANSWER HERE
 ## Task 12: Final Reflection Questions
 
 1. Why is it important for journalists to understand survey weighting when reporting on polls?
+
 
 2. How might the differences between weighted and unweighted results affect how you would report on this data?
 
