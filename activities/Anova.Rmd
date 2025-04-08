@@ -62,7 +62,7 @@ print(admission_summary)
 
 Write a couple of sentences describing the differences in SAT scores between types of colleges, using the descriptive statistics we just generated.
 
-
+Private colleges have the highest mean, followed by public, and then community with the lowest, all fall within 367 of each other, I was expecting a larger difference. Private colleges had the lowest standard deviation, meaning their scores are more clustered and not as wide of a range. I thought it was interesting how no one from community colleges got a max score of 1600, only public and private schools did. I was also surpised at how community colleges minimum score was a lot lower, and how private and publics lowest scores started a lot higher.
 
 ## Task 4: Visualize the Data
 
@@ -127,8 +127,19 @@ All comparisons show extremely small p-values, indicating these differences are 
 Based on our analysis, we can now answer:
 
 1. Is there a significant difference in SAT scores across college types?
+
+Yes, because the ANOVA test calculated an F-value of 284.3 with a p-value far below 0.001, indicating that the differences in mean SAT scores among public, private, and community colleges are highly unlikely to be due to chance.
+
 2. Which specific college types differ from each other?
+
+I think they all differ, but the most significant difference would be between private colleges and community colleges, private has average SAT scores that are 366.96 points higher than community, and this difference is highly significant (p < 0.0001).
+
 3. How large are these differences?
+
+Like I said above, private colleges score 366.96 points higher on average than community colleges (p < 0.0001). Public colleges also score 292.55 points higher than community colleges (p < 0.0001), and private colleges score 74.40 points higher than public colleges (p = 0.000021). All of these differences can be considered statistically significant, as none of the confidence intervals include zero and the p-values are extremely small.
 
 Answer those questions, providing evidence for your answers, and then write a headline and a lead paragraph reporting these findings using active voice and focusing on the differences across types.
 
+"Private and Public Universities in Maryland have significantly higher SAT scores than Community Colleges"
+
+Students admitted to private and public universities in Maryland score significantly higher on the SAT than those attending community colleges, according to a statistical analysis of recent data. Private colleges top the list, with SAT scores averaging nearly 367 points higher than those at community colleges. Public universities also show a great advantage, with scores averaging over 290 points higher. Even between public and private schools, a meaningful gap of about 74 points exists—all backed by very small p-values, indicating strong statistical significance. Community college attendees had a minimum SAT score of 786, while students at public and private universities all scored at least in the 1000s.
