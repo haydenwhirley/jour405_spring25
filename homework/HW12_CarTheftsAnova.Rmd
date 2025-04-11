@@ -1,6 +1,6 @@
 ---
 title: "Prince George's County Car Theft Spike Analysis"
-author: "Your Name"
+author: Hayden Whirley
 ---
 
 ```{r setup, include=FALSE}
@@ -45,7 +45,7 @@ theft_data <- theft_data |>
     date = as.Date(month),
     year = year(date),
     month_number = month(date),
-    theft_rate = (REPLACE_ME / REPLACE_ME) * 100000,
+    theft_rate = (total / population) * 100000,
     time_period = case_when(
       year < 2023 ~ "Pre-spike",
       year == 2023 ~ "Spike year",
@@ -72,7 +72,7 @@ knitr::kable(period_summary, digits = 2,
 
 **Task 2** Describe the results of calculating the rates for each period. What do they suggest? (3 points)
 
-ANSWER_HERE
+The rates suggest a large increase in average car theft rates during the spike year (2023), followed by a continued elevation (but decreasing) in the post-spike period compared to the pre-spike period.
 
 ## Visualizing the Spike Pattern
 
@@ -94,7 +94,9 @@ ggplot(theft_data, aes(x = date, y = theft_rate)) +
 
 **Task 3** Describe the output of this chart and then give it a better, more active title that provides the lede (3 points)
 
-ANSWER HERE
+Looking at he chart, car theft rates stayed pretty consistent in a similar range from 2017 to 2022, and then experienced a dramatic spike in 2023, and rates have been decreasing post-spike but haven't been that low since the pre-spike period.
+
+A better lede title to this chart could be "2023 spiked monthly car theft rates in Prince George's County, slow to return to pre-spike levels". I'm unsure if its needed to include "2017-2025" and didn't know how to add that in my title.
 
 
 Now let's take a look at average theft rates.
@@ -130,9 +132,9 @@ For our ANOVA test, we'll compare the mean theft rates between the three time pe
 
 **Task 4** Fill in the hypotheses (2 points)
 
-- **Null Hypothesis (H0)**: ANSWER HERE
+- **Null Hypothesis (H0)**: There is no significant difference in mean car theft rates between the three time periods.
 
-- **Alternative Hypothesis (H1)**: ANSWER HERE
+- **Alternative Hypothesis (H1)**: There is a significant difference in mean car theft rates between the three time periods.
 
 ### One-way ANOVA Test
 
@@ -144,7 +146,7 @@ summary(period_anova)
 
 **Task 5** Describe the result: are there real differences in the average rates between the time periods? Is this result significant? (5 points)
 
-ANSWER HERE
+Yes, there are real differences in the average car theft rates between the time periods, and the result is statistically significant. The F value is 218, and the p-value is < 2e-16, which is below the standard significance level of 0.05. This means we reject the null hypothesis and conclude that at least one of the time periods has a significantly different mean theft rate compared to the others.
 
 ## Compare the differences between specific periods
 
@@ -190,4 +192,8 @@ This analysis has examined whether there are significant differences in car thef
 
 **Task 6** Describe the results of the Tukey's test and chart showing confidence intervals. Is there a significant difference between the three periods? In particular, is the difference between the pre-spike and post-spike periods real and significant? Write a headline and lede reporting these findings, focusing on the pre- and post-spike periods. (5 points)
 
-ANSWER HERE
+The Tukey test showed all the confidence intervals are well above or below zero and do not cross zero, which indicates that the differences are statistically significant. Combined with the p-values of 0.000, I can conclude that each period's mean car theft rate is statistically different from the others. Looking at the chart, I can verify the data that car theft rates in Prince George’s County increased sharply in 2023, and were at their lowest during the pre-spike period.
+
+"Car Theft Rates remain elevated in Prince George’s County post 2023 surge"
+
+Car thefts in Prince George’s County surged dramatically in 2023, and while rates have since declined, they remain significantly higher than before the spike.
