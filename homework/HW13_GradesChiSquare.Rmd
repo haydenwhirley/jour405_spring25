@@ -65,7 +65,7 @@ Observed Frequency: The actual observed number of students for each grade catego
 
 **Task 1** Looking at the grade_data broadly, do you think that the differences between the expected and observed frequencies are meaningful? Why or why not? (3 points)
 
-ANSWER HERE
+Looking at the data, the differences between the expected and observed frequencies do seem meaningful, definitely for certain grade categories such as the number of students who received an A is 100, which is 20 more than the expected frequency of 80. Also, C grades show a shortfall of 20 students compared to what was expected. The other grades like B, D, and F are closer to their expected values with differences of only about 5–10 students.
 
 
 ### Chi-Square Test
@@ -74,7 +74,7 @@ To perform the chi-square test, we will use the chisq.test() function from the v
 **Task 2** Replace the REPLACE_ME with the appropriate variable or value (2 points)
 
 ```{r}
-chisq_result <- chisq.test(REPLACE_ME, p = REPLACE_ME)
+chisq_result <- chisq.test(grade_data$Observed_Frequency, p = grade_data$Percentage)
 chisq_result
 ```
 
@@ -97,7 +97,7 @@ To interpret the results, we need to compare the chi-square statistic with the c
 
 ```{r}
 alpha <- 0.05
-df <- length(REPLACE_ME) - REPLACE_ME
+df <- length(grade_data$Grade) - 1
 critical_value <- qchisq(alpha, df, lower.tail = FALSE)
 critical_value
 ```
@@ -105,9 +105,16 @@ critical_value
 
 **Task 3** If the chi-square statistic is greater than the critical value, we reject the null hypothesis at the 0.05 alpha level. Do we? (3 points)
 
-ANSWER HERE
+Yes we do, the chi-square statistic is 11.667, greater than the critical value of 9.48.
 
 
 **Task 4** Describe the differences in the expected and observed frequencies for each grade category. Are there any notable discrepancies? What questions would you ask either the instructor or college about these discrepancies? (5 points)
 
-ANSWER HERE
+I think the most notable discrepancies were more students received A’s than expected (100 observed vs. 80 expected), and fewer students received C’s (100 observed vs. 120 expected). 
+
+The other grade categories are as follows:
+B: 120 expected, 125	observed, +5
+D: 40 expected, 45 observed	+5
+F: 40 expected,	30 observed	-10 (I think this difference is also worth noting. It suggests that fewer students failed than anticipated, which may indicate that the college or instructor overestimated how many students would struggle.)
+
+I would ask the college or instructor, “How come you expected fewer students to earn A’s?” and "What factors were used to determine the expected grade distribution—was it based on past data or general assumptions about student performance?”
