@@ -1,6 +1,6 @@
 ---
 title: "Diversity Index for Maryland Cities"
-author: "Your Name"
+author: "Hayden Whirley"
 ---
 
 ```{r setup, include=FALSE}
@@ -18,7 +18,7 @@ A score of 0 indicates no diversity (everyone is the same race/ethnicity), while
 
 Run the following code to load the data, then examine it and describe what it contains. Based on the raw numbers alone, which cities stand out as diverse to you?
 
-**ANSWER HERE**
+It contains each city's population, a "TwoPlusRaces" column which I'm assuming that means residents identified with two or more racial categories on the census. Race categories include White, Black, Native, Asian, NHPI, and Other. It also includes Hispanic & Non Hispanic ethnicities. Cities that stand out to me as diverse include Baltimore City, Silver Spring, Gaithersburg, Germantown, Aspen Hill, and Wheaton to name a few.
 
 ```{r load-data}
 md_cities <- read_csv("https://raw.githubusercontent.com/dwillis/jour405/refs/heads/main/data/usat_diversity_index.csv")
@@ -60,7 +60,7 @@ md_cities <- md_cities |>
 
 The race probability is the sum the squared probabilities for each of the races. It represents the probability that two people randomly chosen from the same city will be of the same race. Which city has the highest race probability, and why do you think that is?
 
-**ANSWER HERE**
+Summerfield has the highest race probability at 87%, this could be because a large majority of residents identify with the same racial group (93% Black). This lowers the chances of racial diversity within the city and increases the likelihood that two randomly selected people will share the same racial identity. It's also important to note that this city has a lower population of 12,403, the majority of Maryland cities have a larger population than this so the likelihood of encountering racial diversity is reduced.
 
 ```{r race-prob}
 md_cities <- md_cities |>
@@ -77,7 +77,7 @@ View(md_cities)
 
 Hispanic origin is not a race but an ethnicity or nationality – and a separate Census question. The probability someone is Hispanic or not Hispanic must be calculated separately from race, and Hisp_Prob is the probability that two randomly selected people will be Hispanic or not. That's an important distinction, because unlike race probability, this measures the likelihood of a binary question: that both random people will be Hispanic. What do you notice about the cities with the *lowest* Hisp_Prob scores?
 
-**ANSWER HERE**
+The cities with the lowest Hisp_Prob scores around 5–6% have varying population sizes, but when I looked at their racial breakdowns, they appear fairly diverse, with no single racial group heavily dominating. This makes sense because the likelihood of two randomly selected people being Hispanic is lower in places where the Hispanic population is more evenly balanced among other ethnic groups (the chance they are not Hispanic). Their Hispanic vs. Not Hispanic percentages are closer in range.
 
 ```{r ethnicity}
 md_cities <- md_cities |>
@@ -110,7 +110,7 @@ md_cities <- md_cities |>
 
 The final step is to calculate the probability that two people randomly chosen WILL NOT BE OF THE SAME RACE OR ETHNICITY. In other words, the highest index scores will be cities where those two random people will be from different backgrounds. Put simply, more diverse. Which cities are the top 3, and where are they located? Look at the bottom of the list - which city is the least diverse, and where is it?
 
-**ANSWER HERE**
+The 3 cities that have the highest diversity index are Langley Park, Wheaton, and Adelphi, all above a score of at least 90. They are fairly close to College Park actually, and closer to the DC line. The least diverse city is Lake Shore, located on the Chesapeake Bay, above Annapolis, and below Baltimore.
 
 ```{r diversity-index}
 md_cities <- md_cities |>
@@ -126,4 +126,22 @@ View(md_cities)
 
 Given the data that you've produced here, write a headline and lede of the most interesting story from this exercise, and add below that details on how you would report it out: who you'd talk to and the questions you'd ask. When you describe the Diversity Index values, do so in a similar way to how USA Today did; the raw values themselves won't mean much to readers.
 
-**ANSWER HERE**
+Headline: "Maryland's Diversity Index: How likely are you to meet someone of a different race or ethnicity?"
+
+Lede: Maryland's most diverse communities—like Langley Park, Wheaton, and Adelphi—sit just outside Washington, D.C., where residents are more likely than not to bump into someone of a different racial or ethnic background. In fact, the probability that two randomly chosen people in Langley Park are not of the same race or ethnicity is 97%, the highest in the state. On the other end of the spectrum is Lake Shore, a waterfront suburb on the Chesapeake Bay, where there's a 15% chance two people selected at random will be from the same racial and ethnic group. 
+
+Reporting plan:
+
+Who I would talk to - residents of the most diverse cities - Langley Park, Wheaton, Adelphi, and residents of the least diverse cities - Lake Shore, Lake Arbor, & Largo. I would also maybe talk to Community leaders like school staff, city government leadership, or local business owners to understand how diversity plays out in public life—schools, businesses, cultural events, and neighborhoods. To get a wider picture, I might also talk to these people in the cities in the middle of the spectrum, like Brooklyn Park, Easton, or Potomac, where the diversity index hovers around 50%, to hear how they experience a more moderate mix.
+
+Some of the questions I would ask could be "How would you describe the racial and cultural makeup of your community?"
+
+“How often do you interact with people from different racial or ethnic backgrounds in your day-to-day life?
+
+"Do you feel like your city’s diversity (or lack of it) affects your daily life or sense of belonging?"
+
+"Have you seen your community change over the years in terms of who lives here or what languages are spoken?"
+
+"What brings people to your community?"
+
+I’d include a table or link to the full dataset within the article, since it’s quite large, and encourage readers to look at the diversity index for their own city to see how it compares.
