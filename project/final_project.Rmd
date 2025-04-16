@@ -38,7 +38,7 @@ It seems the Netflix data is global, but only some years have domestic data avai
 
 Movie Theater Data
 
-Domestic Theatrical Market Summary 1995 to 2025 - Annual Ticket Sales
+Domestic Theatrical Market Summary 1995 to 2025
 https://www.the-numbers.com/market/ 
 *U.S.
 This source features a comprehensive table of U.S. movie ticket sales and box office data from 1995 to 2025. It covers metrics like annual ticket sales, total gross revenue, and average ticket prices. The data is in table format on the site and can be manually entered into Excel or CSV. It’s a valuable resource to use for analyzing movie theater success or decline in the U.S. I think annual ticket sales serve as a way to measure attendance, since direct visitor data isn’t provided. It seems that finding specific data on the number of people physically entering movie theaters is unavailable, so ticket sales may be the best proxy.
