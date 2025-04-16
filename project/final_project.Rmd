@@ -1,1 +1,56 @@
+Jour405 Final Project Notes
+Hayden Whirley 
+
+Relationship between streaming service subscriptions and movie theater attendance *in the United States
+My hypothesis: increase in streaming service subscriptions → decline in movie theater attendance
+How strong is the correlation?
+Weak negative, weak positive, strong negative, strong positive 
+Need to pick some measure of movie attendance, whether an average or some other metric
+Similar work: https://filmgrail.com/blog/impact-of-streaming-on-cinema-attendance/ 
+
+Notes from Prof. Willis:
+You'd need to pick some measure of movie attendance, whether an average or some other metric. See if you can find similar work.
+I think that you could use AMC as a proxy for "movie theaters" in general, but not sure you can get anything below the national level (or maybe worldwide), unfortunately. As these kinds of figures are literally business secrets, they're not widely available to the public.
+The last source you linked to is probably better since it's U.S. and has annual figures. Not sure I would use post-2019 numbers, though, because of COVID's impact.
+Similarly, you could use Netflix as a proxy for streaming services, particularly prior to 2020, and get revenue numbers from the company's annual reports: https://ir.netflix.net/financials/annual-reports-and-proxies/default.aspx. Those might also have subscriber totals.
+
+My Compiled Data List Spreadsheet:
+https://docs.google.com/spreadsheets/d/1cQdo7W6Bd9qe-0x38SEb0gBwgAN1J1d9OYCxID_2poc/edit?usp=sharing 
+
+Streaming Service Data
+
+Netflix Annual Reports
+https://ir.netflix.net/financials/annual-reports-and-proxies/default.aspx 
+*Global, domestic available only for some years
+Netflix’s yearly annual reports ranging from 2002-2024 that include revenue numbers, net income, global streaming memberships, along with much other helpful financial and membership data. They also have domestic data available as well for those categories. It’s important to note the amounts are in thousands or millions. This source also has similar netflix data compiled into tables: https://prioridata.com/data/netflix-statistics/  
+
+Hulu Annual Reports
+https://www.businessofapps.com/data/hulu-statistics/ 
+*U.S. 
+Business of Apps provides detailed statistics and data about Hulu, focusing on its financial performance, subscriber count, and market growth. It covers various aspects such as revenue, number of subscribers, subscriber growth, and other key metrics, with the latest data available for 2024. The time period spans from 2010 to 2024, but some metrics are only 2019-2024. Most importantly the data I would want (subscribers & revenues) range from 2010/2011 to 2024.
+
+Notes:
+
+I was considering getting the same metrics from HBO Max to get a wider picture, but then realized they didn’t launch until 2020, so the post-covid data would not be helpful.
+
+It seems the Netflix data is global, but only some years have domestic data available for revenue & subscription totals, or it's combined with Canada. I’m having trouble determining if Hulu’s data is domestic or international. After googling, Hulu is a U.S. company, but your confirmation would be helpful. Hulu then might be better suited to compare with the movie theater data I was able to find, which is mostly domestic.
+
+
+Movie Theater Data
+
+Domestic Theatrical Market Summary 1995 to 2025 - Annual Ticket Sales
+https://www.the-numbers.com/market/ 
+*U.S.
+This source features a comprehensive table of U.S. movie ticket sales and box office data from 1995 to 2025. It covers metrics like annual ticket sales, total gross revenue, and average ticket prices. The data is in table format on the site and can be manually entered into Excel or CSV. It’s a valuable resource to use for analyzing movie theater success or decline in the U.S. I think annual ticket sales serve as a way to measure attendance, since direct visitor data isn’t provided. It seems that finding specific data on the number of people physically entering movie theaters is unavailable, so ticket sales may be the best proxy.
+
+Domestic Yearly Box Office 
+https://www.boxofficemojo.com/year/?grossesOption=totalGrosses
+*U.S.
+I think this is also a good source from IMDbPro for looking at domestic movie theater revenue trends, but it doesn’t include ticket sales or attendance figures. It tracks the total annual gross revenue of films released in U.S. theaters from 1977 to 2025. The data includes metrics such as total gross, number of releases, average gross per release, and the highest-grossing film each year.
+
+Notes:
+These have been the top sources I have been able to find, I think I am leaning towards comparing the Hulu totals with Domestic Movie Theater totals from The Numbers.
+
+Questions:
+When calculating correlation and creating charts to look at the relationship between streaming service and movie theater increases/declines, I know I want to find correlation, but what other data or metrics can be calculated to determine the relationship between the two?
 
