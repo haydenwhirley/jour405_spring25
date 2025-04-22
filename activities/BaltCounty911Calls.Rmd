@@ -1,6 +1,6 @@
 ---
 title: "Baltimore County 911 Overdose Calls Analysis"
-author: "YOUR NAME HERE"
+author: "Hayden Whirley"
 ---
 
 ```{r setup, include=FALSE}
@@ -74,7 +74,7 @@ summary(daily_calls$call_count)
 
 Let's visualize the time series of daily calls. What patterns do you see? If you had to draw horizontal lines that would highlight unusual days, where would those lines be?
 
-ANSWER HERE
+I'm not easily seeing visible patterns, mostly a cluster of data ranging from 5-15 calls per day, with some outliers above and below that range. I would draw the line around 15-17.
 
 ```{r daily-calls-plot}
 # Plot daily call volume
@@ -137,7 +137,7 @@ unusual_days |>
 
 Let's visualize these unusual days in the context of the full dataset. How do they differ from your answer on Task 3?
 
-ANSWER HERE
+I think this makes sense, I said anything below 5 or above 15 I could see as being unusually high or low. These call count numbers are either less than 3 or higher than 18, nothing in between.
 
 ```{r plot-unusual-days}
 # Create a clean factor for the plot legend
@@ -207,7 +207,7 @@ ggplot(dow_summary, aes(x = day_of_week, y = avg_calls)) +
 
 We can also calculate z-scores that account for the day of the week pattern. How would you describe the day with the highest z-score without using the term "z-score"?
 
-ANSWER HERE
+I would say that on October 4, 2022 (a Tuesday), the number of calls (23) was much higher than the average number of calls that is typically seen on Tuesdays (10.3), standing out significantly from the usual Tuesday pattern.
 
 ```{r day-of-week-z-scores}
 # Calculate day-of-week adjusted z-scores
@@ -298,4 +298,6 @@ top_outliers |> kable(digits = 2)
 
 Based on our z-score analysis, what are some potential angles for reporting? What would your next steps be and what would you tell an editor about your findings?
 
-ANSWER HERE
+I think an interesting angle to take is noting the differences in the seasonal numbers, and determining potential causes as to why there are less drug overdoses in the winter months, there was also an unusual spike in the spring. I would also say that drug overdoses were higher on Fridays, Saturdays, and Sundays, compare to weekdays. The top outlier days in 2022 could also be worth investigating further. I think the data that shows patterns whether tha is seasons or days of the week would be the most interesting.
+
+My next steps would be interviewing public health officials or emergency responders to gain deeper context on the high-call days. If I were updating an editor, I’d say that we’re seeing strong evidence of seasonal and weekly trends in overdose data in 2022, with unexpected spikes on specific days. There’s an opportunity to dig into what’s happening during those peak times and possibly connect that to broader systemic issues.
