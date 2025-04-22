@@ -1,6 +1,12 @@
 Jour405 Final Project Notes
 Hayden Whirley 
 
+Week 12 Assignment: Tests I Could Run 
+
+- correlation coefficient
+- scatter plots
+- 
+
 Relationship between streaming service subscriptions and movie theater attendance *in the United States
 My hypothesis: increase in streaming service subscriptions → decline in movie theater attendance
 How strong is the correlation?
@@ -8,14 +14,24 @@ Weak negative, weak positive, strong negative, strong positive
 Need to pick some measure of movie attendance, whether an average or some other metric
 Similar work: https://filmgrail.com/blog/impact-of-streaming-on-cinema-attendance/ 
 
-Notes from Prof. Willis:
+Notes from Prof. Willis for reference:
 You'd need to pick some measure of movie attendance, whether an average or some other metric. See if you can find similar work.
 I think that you could use AMC as a proxy for "movie theaters" in general, but not sure you can get anything below the national level (or maybe worldwide), unfortunately. As these kinds of figures are literally business secrets, they're not widely available to the public.
 The last source you linked to is probably better since it's U.S. and has annual figures. Not sure I would use post-2019 numbers, though, because of COVID's impact.
 Similarly, you could use Netflix as a proxy for streaming services, particularly prior to 2020, and get revenue numbers from the company's annual reports: https://ir.netflix.net/financials/annual-reports-and-proxies/default.aspx. Those might also have subscriber totals.
 
+"Good start here, and a couple of thoughts. I wouldn't toss out Netflix numbers, but Hulu might make a better comparison (it's almost entirely US-based in terms of subscribers) to domestic movie figures. You'll need to get your data in consistent formats, including some standard amount for finances (whether that's thousands or the actual number) so you can make comparisons more easily.
+
+Ideally your data covers the same time period, so see how much of 2010-2019 period you can get (that's really when streaming was taking off). You also might consider trying to track down the number of domestic movie releases per year in case that's a potential factor - fewer movies would logically result in less attendance.
+
+This week's assignment is mostly about what kinds of tests you could run, and you're thinking of the right things: correlation to start, some scatterplots. Beyond that, we'll be learning a new technique next week that should provide some opportunities for you."
+
+
+
 My Compiled Data List Spreadsheet:
 https://docs.google.com/spreadsheets/d/1cQdo7W6Bd9qe-0x38SEb0gBwgAN1J1d9OYCxID_2poc/edit?usp=sharing 
+
+
 
 Streaming Service Data
 
