@@ -5,9 +5,11 @@ Week 12 Assignment: Tests I Could Run
 
 - correlation coefficient
 - scatter plots
-- 
+- % change between the years
+- Overall mean and standard deviation for each variable, then find the z-score for each year to identify unusually high or low changes
+
 *look at past activities/homeworks
-Questions: do you recommend calculating the mean over the years for both streaming & movie theater, and finding the sd that year is from the mean? What about pct change between the years? are there more statistical analysis I could do that determine relationship/correlation?
+Questions: Are there more statistical analysis I could do that determine relationship/correlation?
 
 Relationship between streaming service subscriptions and movie theater attendance *in the United States
 My hypothesis: increase in streaming service subscriptions → decline in movie theater attendance
