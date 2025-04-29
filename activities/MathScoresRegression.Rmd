@@ -1,301 +1,86 @@
----
-title: "Baltimore County 911 Overdose Calls Analysis"
-author: "YOUR NAME HERE"
----
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```{r}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+options(scipen = 999)
 ```
 
-# Z-Score Analysis of Baltimore County 911 Calls
+## Identifying Schools with Biggest Differences in Math Test Scores
 
-## Introduction
+### Introduction
 
-In this analysis, we'll examine data on 911 drug overdose calls from Baltimore County to identify unusually busy or quiet days using z-scores. By calculating the number of calls per day and analyzing their statistical distribution, we can determine which days experienced an abnormal volume of emergency calls - information that could lead to potential story ideas.
+In this analysis, we will create a scatterplot to visualize the relationship between the FARMS (Free and Reduced-price Meal System) percentage and the percentage of students who met or exceeded math expectations. We'll then use linear regression to identify the schools that show the biggest differences between their actual and expected math test scores.
 
-A z-score measures how many standard deviations a data point is from the mean. Generally:
-- Z-scores between -2 and 2 represent typical values (about 95% of the data)
-- Z-scores beyond ±2 indicate unusual values that warrant investigation
-- Z-scores beyond ±3 are very unusual (only about 0.3% of normally distributed data)
+This analysis can be useful for journalists to understand which schools are performing better or worse than expected, based on the socioeconomic status of their student population. By identifying these schools, targeted interventions and support can be provided to help improve student outcomes - and to provide some context on comments by policymakers.
 
-## Task 1: Setup and Data Loading
+### Loading the Data
 
-Let's start by loading the necessary packages and our dataset:
+First, let's load the data into a data frame using the read_csv() function from the tidyverse library.
 
-```{r load-packages}
-library(tidyverse)  # For data manipulation and visualization
-library(lubridate)  # For handling dates
-library(knitr)      # For nice tables
-library(scales)     # For better axis formatting
+```{r}
+schools <- read_csv("https://raw.githubusercontent.com/dwillis/jour405_files/refs/heads/main/montgomery_pa.csv")
 ```
+### Task: Create a Scatterplot and Describe the Results (2 points)
 
-```{r load-data}
-# Load the 911 calls data
-calls_data <- read_csv("https://raw.githubusercontent.com/dwillis/datajournalismbook-maryland/refs/heads/main/data/baltco_911_calls.csv")
+Next, let's create a scatterplot to visualize the relationship between the FARMS percentage and the percentage of students who met or exceeded math expectations. We'll use ggplot2 to create the plot and add a linear regression line.
 
-# Display the first few rows to understand the structure
-head(calls_data)
-```
-
-## Task 2: Initial Data Exploration
-
-Let's explore the basic structure and characteristics of our dataset:
-
-```{r explore-data}
-# Get a summary of the data
-glimpse(calls_data)
-
-# Check for any missing values
-colSums(is.na(calls_data))
-
-# Check the date range in our data
-min_date <- min(calls_data$date)
-max_date <- max(calls_data$date)
-cat("Data ranges from", min_date, "to", max_date)
-
-```
-
-## Task 3: Aggregating Calls by Day (3 points)
-
-Now let's count how many 911 overdose calls occurred on each day:
-
-```{r aggregate-by-day}
-# Count calls per day
-daily_calls <- calls_data |>
-  count(date, name = "call_count")
-
-# Display the first few days
-head(daily_calls, 10) |>
-  kable()
-
-# Basic summary statistics for daily call volume
-summary(daily_calls$call_count)
-```
-
-Let's visualize the time series of daily calls. What patterns do you see? If you had to draw horizontal lines that would highlight unusual days, where would those lines be?
-
-ANSWER HERE
-
-```{r daily-calls-plot}
-# Plot daily call volume
-ggplot(daily_calls, aes(x = date, y = call_count)) +
-  geom_line(color = "darkblue", alpha = 0.7) +
-  geom_point(color = "darkblue", alpha = 0.5, size = 1) +
-  theme_minimal() +
-  labs(title = "Daily 911 Overdose Calls in Baltimore County",
-       x = "Date",
-       y = "Number of Calls",
-       caption = "Source: Baltimore County 911 Call Data") +
-  scale_y_continuous(labels = comma) +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
-```
-
-
-
-
-## Task 4: Calculating Z-Scores for Daily Call Volume
-
-Now, let's calculate z-scores to identify statistically unusual days:
-
-```{r calculate-z-scores}
-# Calculate z-scores for daily call counts
-daily_calls <- daily_calls |>
-  mutate(
-    mean_calls = mean(call_count),
-    sd_calls = sd(call_count),
-    z_score = (call_count - mean_calls) / sd_calls
-  )
-
-# Display the data with z-scores
-daily_calls |>
-  select(date, call_count, z_score) |>
-  head(10) |>
-  kable(digits = 2)
-```
-
-## Task 5: Identifying Unusual Days (3 points)
-
-Let's identify days with unusually high or low call volumes (|z-score| > 2):
-
-```{r identify-unusual-days}
-# Find days with unusual call volumes
-unusual_days <- daily_calls |>
-  filter(abs(z_score) > 2) |>
-  arrange(desc(abs(z_score)))
-
-# Display unusual days
-unusual_days |>
-  select(date, call_count, z_score) |>
-  kable(digits = 2)
-
-# Count how many days were unusually busy vs. unusually quiet
-unusual_days |>
-  group_by(unusual_type = if_else(z_score > 0, "Unusually High", "Unusually Low")) |>
-  summarise(count = n()) |>
-  kable()
-```
-
-Let's visualize these unusual days in the context of the full dataset. How do they differ from your answer on Task 3?
-
-ANSWER HERE
-
-```{r plot-unusual-days}
-# Create a clean factor for the plot legend
-daily_calls <- daily_calls |>
-  mutate(call_volume_type = case_when(
-    z_score > 2 ~ "Unusually High",
-    z_score < -2 ~ "Unusually Low",
-    TRUE ~ "Normal"
-  ))
-
-# Plot with unusual days highlighted
-ggplot(daily_calls, aes(x = date, y = call_count, color = call_volume_type)) +
-  geom_line(color = "gray70") +
-  geom_point(size = 2) +
-  scale_color_manual(values = c("Normal" = "gray50", 
-                               "Unusually High" = "red", 
-                               "Unusually Low" = "blue")) +
-  theme_minimal() +
-  labs(title = "Daily 911 Overdose Calls with Unusual Days Highlighted",
-       subtitle = "Unusual days have z-scores with absolute values > 2",
-       x = "Date",
-       y = "Number of Calls",
-       color = "Call Volume",
-       caption = "Source: Baltimore County 911 Call Data") +
-  scale_y_continuous(labels = comma) +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
-```
-
-## Task 6: Day of Week Patterns
-
-Let's also check if certain days of the week typically see more 911 calls:
-
-```{r day-of-week-analysis}
-# Add day of week to our dataset
-daily_calls <- daily_calls |>
-  mutate(
-    day_of_week = wday(date, label = TRUE)
-  )
-
-# Calculate average calls by day of week
-dow_summary <- daily_calls |>
-  group_by(day_of_week) |>
-  summarise(
-    avg_calls = mean(call_count),
-    median_calls = median(call_count),
-    min_calls = min(call_count),
-    max_calls = max(call_count)
-  ) |>
-  arrange(match(day_of_week, c("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")))
-
-# Display summary by day of week
-dow_summary |> kable(digits = 1)
-
-# Plot calls by day of week
-ggplot(dow_summary, aes(x = day_of_week, y = avg_calls)) +
-  geom_col(fill = "steelblue") +
-  geom_text(aes(label = round(avg_calls, 1)), vjust = -0.5) +
-  theme_minimal() +
-  labs(title = "Average 911 Overdose Calls by Day of Week",
-       x = "Day of Week",
-       y = "Average Number of Calls",
-       caption = "Source: Baltimore County 911 Call Data") +
-  theme(axis.text.x = element_text(angle = 0))
-```
-
-## Task 7: Accounting for Day of Week Pattern (3 points)
-
-We can also calculate z-scores that account for the day of the week pattern. How would you describe the day with the highest z-score without using the term "z-score"?
-
-ANSWER HERE
-
-```{r day-of-week-z-scores}
-# Calculate day-of-week adjusted z-scores
-daily_calls <- daily_calls |>
-  group_by(day_of_week) |>
-  mutate(
-    dow_mean = mean(call_count),
-    dow_sd = sd(call_count),
-    dow_z_score = (call_count - dow_mean) / dow_sd
-  ) |>
-  ungroup()
-
-# Find days that were unusual for their day of the week
-dow_unusual_days <- daily_calls |>
-  filter(abs(dow_z_score) > 2) |>
-  arrange(desc(abs(dow_z_score)))
-
-# Display days that were unusual for their day of the week
-dow_unusual_days |>
-  select(date, day_of_week, call_count, dow_mean, dow_z_score) |>
-  kable(digits = 2)
-```
-
-
-## Task 8: Temporal Patterns and Trends
-
-Let's also look for seasonal patterns or trends over time:
-
-```{r temporal-analysis}
-# Add month and year for seasonal analysis
-daily_calls <- daily_calls |>
-  mutate(
-    month = month(date, label = TRUE),
-    year = year(date)
-  )
-
-# Calculate average calls by month
-monthly_summary <- daily_calls |>
-  group_by(month) |>
-  summarise(
-    avg_calls = mean(call_count),
-    median_calls = median(call_count)
-  )
-
-# Plot calls by month
-ggplot(monthly_summary, aes(x = month, y = avg_calls, group = 1)) +
-  geom_line() +
+```{r}
+schools |>
+  ggplot(aes(x = `FARMS Pct`, y = `% Met or Exceeded Math Expectations`)) +
   geom_point() +
-  theme_minimal() +
-  labs(title = "Average 911 Overdose Calls by Month",
-       x = "Month",
-       y = "Average Number of Calls",
-       caption = "Source: Baltimore County 911 Call Data")
-
-# Show a rolling 7-day average to better see trends
-daily_calls <- daily_calls |>
-  arrange(date) |>
-  mutate(rolling_avg_7day = zoo::rollmean(call_count, k = 7, fill = NA))
-
-# Plot with 7-day rolling average
-ggplot(daily_calls, aes(x = date)) +
-  geom_line(aes(y = call_count), color = "gray60", alpha = 0.7) +
-  geom_line(aes(y = rolling_avg_7day), color = "blue", size = 1) +
-  theme_minimal() +
-  labs(title = "Daily 911 Overdose Calls with 7-Day Moving Average",
-       x = "Date",
-       y = "Number of Calls",
-       caption = "Source: Baltimore County 911 Call Data") +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+  geom_smooth(method = "lm", se = FALSE, color = "red") +
+  labs(x = "FARMS Percentage", y = "% Met or Exceeded Math Expectations", title = "Scatterplot of Math Expectations vs FARMS Percentage")
 ```
 
-## Task 9: T Most Unusual Days
+The scatterplot shows the overall trend of the relationship between the FARMS percentage and the math test scores. The red line represents the linear regression line, which helps us understand the average relationship between the two variables. Based on what you see here, what's the relationship between FARMS percentage and math test scores?
 
-For the most unusual days, we might want to check if they coincide with significant events:
+ANSWER HERE
 
-```{r investigate-top-outliers}
-# Get the top 10 most unusual days
-top_outliers <- daily_calls |>
-  arrange(desc(abs(z_score))) |>
-  head(10) |>
-  select(date, day_of_week, call_count, z_score)
 
-# Display these days
-top_outliers |> kable(digits = 2)
+### Task: Linear Regression Model (3 points)
+
+Next, we'll perform a linear regression analysis using the lm() function. We'll set the percentage of students who met or exceeded math expectations as the dependent variable, and the FARMS percentage as the independent variable. In other words, if we know the FARMS percentage for a school, how reliably can we predict its math score?
+
+```{r}
+model <- lm(`% Met or Exceeded Math Expectations` ~ `FARMS Pct`, data = schools)
+
+summary(model)
 ```
 
-## Task 10: Journalistic Insights (6 points)
+There are three things we need to examine here: the p-value, the Adjusted R-squared value and the coefficients. You know what a p-value is and how to evaluate it. The Adjusted R-squared is a measure of how much of the difference between schools' math scores can be explained by their FARMS percentage. You don't need to multiply that figure by anything: that's a percentage. The closer the adjusted R-squared is to 100, the more of the outcome the independent variable explains. If both the p-value and adjusted R-squared values are significant, we can look to the coefficients.
 
-Based on our z-score analysis, what are some potential angles for reporting? What would your next steps be and what would you tell an editor about your findings?
+In the middle, you can see the (Intercept) is 59.57897 and the FARMS coefficient is 0.12349. Remember high school algebra? Remember learning the equation of a line? Remember swearing that learning y=mx+b is stupid because you’ll never need it again? Surprise. It’s useful again. In this case, we could try to predict a school's score math score by using y=mx+b. In this case, y is the math score, m is 0.12349 and b is 59.57897. So we would multiply a school's FARMS percentage by 0.12349 and then add 59.57897 to it. The result would tell you what the math score would be, according to our model.
+
+Based on what you've learned so far, is this model worth using? What does it tell us about the nature of the relationship between FARMS percentage and math scores?
+
+ANSWER HERE
+
+### Task: Identifying Schools with Biggest Residuals (2 points)
+
+To find the schools with the biggest differences between their actual and expected math test scores, we'll extract the residuals from the linear regression model. The residuals represent the difference between the actual and predicted values. Residuals can tell you several things, but most important is if a linear model the right model for your data. If the residuals appear to be random, then a linear model is appropriate. If they have a pattern, it means something else is going on in your data and a linear model isn’t appropriate.
+
+Residuals can also tell you who is under-performing and over-performing the model. And the more robust the model – the better your r-squared value is – the more meaningful that label of under or over-performing is. 
+
+We'll then use the arrange() function to sort the data frame by the absolute value of the residuals.
+
+```{r}
+schools$predicted <- predict(model)
+
+# Calculate the residuals
+schools <- schools |> 
+  mutate(residual = `% Met or Exceeded Math Expectations` - predicted)
+
+# Sort the data frame by the absolute value of the residuals in descending order
+schools <- schools |>
+  mutate(abs_residual = abs(residual)) |>
+  arrange(desc(abs_residual))
+
+```
+The schools with the biggest positive residuals are performing better than expected, while the schools with the biggest negative residuals are performing worse than expected, based on their FARMS percentage. Look at the absolute values of the residuals; what are the largest differences between the predicted result and the actual math scores?
+
+ANSWER HERE
+
+## Task: Evaluate the model (3 points)
+
+A school board member has said at a meeting that elementary schools with fewer students on free and reduced price meals do better on standardized math tests. Describe what conclusions you'd draw from this model's results and how it would influence a story pitch about the school board member and math scores.
 
 ANSWER HERE
