@@ -33,7 +33,7 @@ schools |>
 
 The scatterplot shows the overall trend of the relationship between the FARMS percentage and the math test scores. The red line represents the linear regression line, which helps us understand the average relationship between the two variables. Based on what you see here, what's the relationship between FARMS percentage and math test scores?
 
-ANSWER HERE
+The line of best fit shows it's a small positive/upward trend, but the points are all over the place and widely scattered, there isn't a distinct correlation.
 
 
 ### Task: Linear Regression Model (3 points)
@@ -52,7 +52,7 @@ In the middle, you can see the (Intercept) is 59.57897 and the FARMS coefficient
 
 Based on what you've learned so far, is this model worth using? What does it tell us about the nature of the relationship between FARMS percentage and math scores?
 
-ANSWER HERE
+I don't think this model is strong or worth relying on heavily for drawing conclusions or making predictions. I say this because the p-value for the FARMS percentage coefficient (0.12349) is 0.1225, which is greater than 0.05. This means the relationship between FARMS percentage and math scores is not statistically significant.
 
 ### Task: Identifying Schools with Biggest Residuals (2 points)
 
@@ -77,10 +77,10 @@ schools <- schools |>
 ```
 The schools with the biggest positive residuals are performing better than expected, while the schools with the biggest negative residuals are performing worse than expected, based on their FARMS percentage. Look at the absolute values of the residuals; what are the largest differences between the predicted result and the actual math scores?
 
-ANSWER HERE
+The largest differences I see are Whitemarsh Elementary which performed much worse than expected given their low FARMS rate. Crooked Billet Elementary performed much better than expected, they actually had 95% success for math scores, when predicted was 64%. Gulph, Lower Gwynedd, and Rydal West all underperformed significantly compared to expectations.
 
 ## Task: Evaluate the model (3 points)
 
 A school board member has said at a meeting that elementary schools with fewer students on free and reduced price meals do better on standardized math tests. Describe what conclusions you'd draw from this model's results and how it would influence a story pitch about the school board member and math scores.
 
-ANSWER HERE
+The conclusions I would draw from the results are that there is a very weak relationship between FARMS percentage and math performance, although some schools significantly outperform or underperform the expectations based on their FARMS rates. This could influence a story pitch by wanting to focus on schools that challenge the trend, and highlighting what factors may contribute to their success or struggles such as resources, and challenging the school board member’s conclusion that socioeconomic status alone determines academic performance.
