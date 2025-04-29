@@ -3,6 +3,14 @@ Hayden Whirley
 
 Week 13 Assignment: Trials, Errors, and Lessons
 
+In this analysis, I am looking at the relationship between 
+my hypothesis is that as 
+comparing hulu & domestic box office? both national numbers for the united states
+both subcriptions & tickets sold, and revenues
+
+context on how i am doing up to 2019, when streaming took of, covid years would mess up numbers
+hypothesis that as streaming became more popular, watching at home movies and tv shows at your fingertips, led to decrease in the succes of movie theathers, whether thats measured in ticket sold or total revenue
+
 ```{r}
 
 ```
