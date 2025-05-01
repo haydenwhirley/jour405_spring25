@@ -1,6 +1,6 @@
 ---
 title: "Identifying Schools with Biggest Differences in Math Test Scores, Part 2"
-author: "YOUR NAME"
+author: "Hayden Whirley"
 ---
 
 ```{r}
@@ -35,8 +35,9 @@ schools |>
 ```
 Based on what you see here, what's the relationship between FARMS percentage and math test scores? Compare this scatterplot to the one you made in the class activity.
 
-ANSWER HERE
+The relationship appears to be somewhat strong, though not very strong, and negative. As the percentage of students in the FARMS program increases at each school, the percentage of students who met or exceeded math expectations tends to decrease.
 
+In comparison to the scatterplot from the class activity, this one shows a more clearly defined relationship, meaning the negative correlation between FARMS percentage and math test scores is more visually apparent, instead of weak.
 
 ### Task: Linear Regression Model (7 points)
 
@@ -51,6 +52,7 @@ summary(model)
 Provide the model's output for the three statistics mentioned in the class activity.
 
 ANSWER HERE
+The p-value, the Adjusted R-squared value and the coefficients
 
 Based on what you've learned so far, what does it tell us about the nature of the relationship between FARMS percentage and math scores? Is this model worth exploring further? Why or why not?
 
