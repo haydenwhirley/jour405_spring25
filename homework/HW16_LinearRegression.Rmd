@@ -37,7 +37,7 @@ Based on what you see here, what's the relationship between FARMS percentage and
 
 The relationship appears to be somewhat strong, though not very strong, and negative. As the percentage of students in the FARMS program increases at each school, the percentage of students who met or exceeded math expectations tends to decrease.
 
-In comparison to the scatterplot from the class activity, this one shows a more clearly defined relationship, meaning the negative correlation between FARMS percentage and math test scores is more visually apparent, instead of weak.
+In comparison to the scatterplot from the class activity, this one shows a more clearly defined relationship, meaning the negative correlation between FARMS percentage and math test scores is more visually apparent, instead of a weak relationship.
 
 ### Task: Linear Regression Model (7 points)
 
@@ -51,12 +51,18 @@ summary(model)
 
 Provide the model's output for the three statistics mentioned in the class activity.
 
-ANSWER HERE
-The p-value, the Adjusted R-squared value and the coefficients
+P-value: < 0.00000000000000022
+Adjusted R-squared value: 0.6734
+Coefficients: y-intercept: 68.04878 slope for FARMS Pct: -0.59511
 
 Based on what you've learned so far, what does it tell us about the nature of the relationship between FARMS percentage and math scores? Is this model worth exploring further? Why or why not?
 
-ANSWER HERE
+These numbers tell us that there is a strong, statistically significant negative relationship between the FARMS percentage and math scores. 
+
+For every 1% increase in FARMS, math scores decrease by about 0.6 percentage points. The r-squared value of 0.6734 means that 67% of the variation in math scores can be explained by differences in FARMS percentages. The y-intercept of 68 tells us the model predicts if a school had 0% low-income students, about 68% of students would meet or exceed math expectations. Lastly, the p-value is extremely small (essentially 0), showing this relationship is highly unlikely to be due to random chance.
+
+I think this is definitely a model worth exploring further because it shows a statistically significant clear trend, and I'd want to deeper analyze the underlying causes of the performance gap.
+
 
 ### Task: Identifying Schools with Biggest Residuals (3 points)
 
@@ -78,10 +84,18 @@ schools <- schools |>
 
 Look at the absolute values of the residuals; what are the largest differences between the predicted result and the actual math scores? Pick two schools with the largest residuals. Find the zip codes where they are located and using the CensusReporter.org website, describe the most interesting demographic data from each zip code.
 
-ANSWER HERE
+I am choosing Fox Chapel Elementary and Germantown Elementary from the top of the list, they are actually both located in Germantown, MD and share the same general zip code demographic data. Their math scores are surprisingly different. Fox Chapel had a predicted math score rate of 34% but actually scored 64%, far exceeding expectations. Germantown Elementary was predicted to score 46% but only reached 18%.
+
+Germantown’s zip code data shows:
+Median household income: $101,446
+7.8% persons below poverty line
+Racial/ethnic breakdown: 26% White, 27% Black, 23% Asian, 19% Hispanic
+I think this suggests the area is generally well-off, and a highly diverse community.
+
+What makes this interesting is that Fox Chapel has a higher FARMS percentage (56%) than Germantown Elementary (35%), meaning it serves a higher proportion of low-income students. Fox Chapel performed much better than predicted, while Germantown fell far below expectations. This suggests that similar community demographics don't always translate to similar school outcomes. Fox Chapel’s strong performance challenges the assumption from our model that higher FARMS percentages directly predict lower math scores. It shows the need to consider other factors contributing to academic success, rather than just the amount of low-income students.
 
 ## Task: Evaluate the model (5 points)
 
 Describe what conclusions you'd draw from this model's results and how it would influence a story pitch about the school board member and math scores.
 
-ANSWER HERE
+This model shows a strong, statistically significant negative relationship between FARMS percentage and math scores. Schools with more low-income students tend to have lower performance on math tests. But cases like Fox Chapel Elementary, which outperformed expectations despite a high FARMS percentage, suggest there are other factors at play beyond just income level. For a story pitch to a school board member, I would emphasize the overall trend but also detail the importance of investigating what successful schools like Fox Chapel are doing differently. The story could explore how school-specific practices, resources, or leadership might explain why some high-FARMS schools are succeeding despite economic disadvantage.
