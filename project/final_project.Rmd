@@ -29,7 +29,14 @@ hulu_theaters |>
   labs(x = "Hulu Subscribers", y = "Movie Theater Tickets Sold", title = "Scatterplot of Hulu Subscribers vs Movie Theater Tickets Sold")
 ```
 
-*SUMMARY HERE
+
+## Correlation Coefficient
+```{r}
+hulu_theaters |> summarize(correlation = cor(hulu_subscribers, mt_tickets, method = "pearson"))
+```
+
+The scatterplot shows a negative but relatively weak relationship between the number of Hulu subscribers and the number of movie theater tickets sold. The correlation coefficiant indicates a moderate negative relationship, meaning that as Hulu subscriptions tend to increase, movie theater ticket sales tend to decrease. Since the correlation is not very strong, the relationship is not consistent or highly predictive, so other factors likely could influence movie theater ticket sales as well. The weak-to-moderate strength of the correlation means that Hulu subscriptions are only partially related to changes in movie ticket sales and should not be seen as the sole cause of decline in theater attendance.
+
 
 ## Create a Scatterplot for Revenue
 ```{r}
@@ -40,33 +47,61 @@ hulu_theaters |>
   labs(x = "Hulu Revenue", y = "Movie Theater Revenue", title = "Scatterplot of Hulu Revenue vs Movie Theater Revenue")
 ```
 
-*SUMMARY HERE
 
-## Correlation Coefficients
-```{r}
-hulu_theaters |> summarize(correlation = cor(hulu_subscribers, mt_tickets, method = "pearson"))
-```
+## Correlation Coefficient
 ```{r}
 hulu_theaters |> summarize(correlation = cor(hulu_revenue, mt_revenue, method = "pearson"))
+
 ```
-*calculate for movie releases
-*SUMMARY HERE
+
+These results show a moderate positive correlation (0.638) between Hulu revenue and movie theater revenue. This means that as Hulu’s revenue increased, movie theater revenue also tended to increase. Rather than competing directly, this suggests the two may have grown together.
+
+
+## Create a Scatterplot for Movie Releases
+```{r}
+hulu_theaters |>
+  ggplot(aes(x = movie_releases, y = mt_tickets)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE, color = "red") +
+  labs(x = "# of Movie Releases", y = "Movie Theater Tickets Sold", title = "Scatterplot of # of Movie Releases vs Movie Theater Tickets Sold")
+```
+
+
+## Correlation Coefficient
+```{r}
+hulu_theaters |> summarize(correlation = cor(movie_releases, mt_tickets, method = "pearson"))
+```
+This data doesn't support that my original thought that more movie releases lead to an increase in tickets sales. The weak negative correlation (-0.26) shows the opposite—as the number of movie releases increases, ticket sales slightly decrease. While the trend isn't strong enough to make a definitive claim, it suggests that increasing the number of films in theaters does not correspond to higher overall attendance. This could mean that other factors such as changing consumer habits or economic constraints are pulling attention away from theaters altogether, regardless of how many movies are released.
+
 
 ## Percent Change
+Here I asked AI to calculate in R, using the tidyverse, the pct change between each year in each given column. I wasn't sure about the most efficient way to do this.
 ```{r}
-
+hulu_theaters <- hulu_theaters %>%
+  arrange(year) %>%
+  mutate(
+    pct_change_hulu_subscribers = (hulu_subscribers - lag(hulu_subscribers)) / lag(hulu_subscribers) * 100,
+    pct_change_hulu_revenue = (hulu_revenue - lag(hulu_revenue)) / lag(hulu_revenue) * 100,
+    pct_change_mt_tickets = (mt_tickets - lag(mt_tickets)) / lag(mt_tickets) * 100,
+    pct_change_mt_revenue = (mt_revenue - lag(mt_revenue)) / lag(mt_revenue) * 100,
+    pct_change_movie_releases = (movie_releases - lag(movie_releases)) / lag(movie_releases) * 100
+  )
 ```
 
-*SUMMARY HERE
+##SUMMARY HERE
+- Hulu subscribers and hulu revenue are all positive increases each year, some smaller than others though.
+- Movie theater tickets sold and revenue numbers do have some negative pct changes but no drastic decreases, just small percentages. 
+- So we can't really say that movie theater success was increasing every year as much as Hulu was.
+
 
 ## T-Test
 ```{r}
 
 ```
 
-*SUMMARY HERE
+##SUMMARY HERE
 
-*CONCLUSION
+##CONCLUSION
 was my hypothesis correct?
 
 
