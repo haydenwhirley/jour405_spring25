@@ -88,7 +88,6 @@ hulu_theaters <- hulu_theaters %>%
   )
 ```
 
-##SUMMARY HERE
 - Hulu subscribers and hulu revenue are all positive increases each year, some smaller than others though.
 - Movie theater tickets sold and revenue numbers do have some negative pct changes but no drastic decreases, just small percentages. 
 - So we can't really say that movie theater success was increasing every year as much as Hulu was.
