@@ -51,9 +51,9 @@ The coefficients tell us the estimated effect of each independent variable on th
 *   **Adjusted R-squared**: 0.5828 adjusts the R-squared for the number of predictors and indicates that about 58.28% of the variance is explained by the model after accounting for the number of variables used.
 *   **F-statistic**: The F-statistic of 15.44 with a very low p-value (4.058e-06) suggests the model as a whole is statistically significant.
 
-Is this a useful model, based on what you've seen? Why?
+Is this a useful model, based on what you've seen? Why or why not?
 
-ANSWER HERE
+I think this is a useful model because it is statistically significant overall. The p value  The p-value is 4.058e-06, which is far below 0.05, indicating it explains a significant portion of the variability in wins. Also, the R-squared of 0.6232 means over 62% of the variation in team wins is accounted for by the variables in the model.
 
 ## Correlation Analysis
 
@@ -79,8 +79,10 @@ The results from our correlation analysis show the strength of the relationships
 
 Which of these three factors - Yards Gained, Takeaways and Points Scored - have the most impact on wins? Are there any that do not seem impactful at all?
 
-ANSWER HERE
+Points scored has the most impact on wins because it has the highest correlation coefficient of 0.7078, which shows a strong positive relationship. Takeaways seem to have a moderate effect (0.5704), while yards gained has the weakest correlation (0.4430) and I would probably drop, it was not really statistically significant in the regression, suggesting it has the least impact on wins. But it's also important to consider that yards gained still has an impact on scoring points, which ultimately has an impact on winning games.
 
 ## Using the Model (3 points)
 
 Without using the words "multiple regression model", describe how you could use this model to cover a team or game.
+
+I would use this model to explain why certain teams are winning by showing how scoring points has the biggest impact on their success. It could also help show how teams that get more takeaways tend to perform better, even if it’s not as strong a factor as scoring. This is a good way to use data to explain what’s really driving a team’s performance and what actually correlates to those wins. I can also talk about the teams that aren't as successful with these factors.
