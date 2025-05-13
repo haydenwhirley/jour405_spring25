@@ -1,3 +1,84 @@
 Jour405 Final Project
 Hayden Whirley 
 
+## Introduction 
+
+In this analysis, I examine the relationship between the success of streaming services and the performance of movie theaters. My hypothesis is that as streaming services have become more successful, movie theaters have experienced a decline. The growing convenience of at-home viewing—offering instant access to movies and TV shows—may be contributing to a measurable decline in theater attendance and revenue.
+
+I chose Hulu as a proxy for a leading U.S. streaming service and used a Domestic Movie Theatrical Market Summary as my source for box office data. 
+##included hulu subscirbers each year, movie theater tickets sold each year, and revenues for both, as variables to meadure the succes of both these _____.
+
+I also included numbers from Box Office Mojo/IMDbPro for the number of movie releases each year in my data frame, which can also play a factor in affecting the number of tickets sold and overall box office revenue. To maintain consistency and avoid the distortions caused by the COVID-19 pandemic, I am focusing on data up to 2019—when streaming services had already gained significant popularity.
+
+For my analysis, I will create a scatterplot to visualize the relationship between the variables, calculate the correlation coefficient, analyze the percent change across years, and perform a t-test to assess the statistical significance of the observed trends.
+##finding a mean & more about the t test
+
+
+## Load the Tidyverse
+```{r}
+library(tidyverse)
+```
+
+## Load My Data
+```{r}
+hulu_theaters <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vTvHYClYHUErcO_da-Lfl_lTBU7oiw6OTImGqXwNDHUsPKhEoSqh7fDGOAFy8QxPoueFxkQOrZKeoKi/pub?gid=1238930269&single=true&output=csv")
+```
+
+First, I'm calculating the correlation coefficient to measure the strength and direction of the linear relationship between Hulu subscriptions and movie theater tickets sold each year. This helps me determine whether there's a meaningful connection between the two variables.
+
+## Correlation Coefficient
+```{r}
+hulu_theaters |> summarize(correlation = cor(hulu_subscribers, mt_tickets, method = "pearson"))
+```
+
+This correlation coefficient (-0.54) indicates a moderate negative relationship, meaning that as Hulu subscriptions tend to increase, movie theater ticket sales tend to decrease. Since the correlation is not very strong, the relationship is not consistent or highly predictive, so other factors likely could influence movie theater ticket sales as well. The moderate strength of the correlation means that Hulu subscriptions are only partially related to changes in movie ticket sales and should not be seen as the sole cause of decline in theater attendance. A coefficient closer to -0.7 to -1 would determine a stronger correlation and we could say that these two variables have a more consistent and predictable linear relationship.
+
+
+
+Next, I will create a scatterplot for those same variables to better visualize the relationship between Hulu subscriptions and movie theater ticket sales. This visual representation will help reveal any patterns, trends, or outliers that may not be as clear from the correlation coefficient alone.
+
+## Scatterplot
+```{r}
+hulu_theaters |>
+  ggplot(aes(x = hulu_subscribers, y = mt_tickets)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE, color = "red") +
+  labs(x = "Hulu Subscribers", y = "Movie Theater Tickets Sold", title = "Scatterplot of Hulu Subscribers vs Movie Theater Tickets Sold")
+```
+
+This scatterplot shows that while there is a slight downward trend—represented by the red line of best fit indicating a negative relationship, the data points are not tightly clustered along the line. This suggests that the correlation is not very strong. The variability in the data points means that while an increase in Hulu subscriptions may be associated with a decrease in movie ticket sales, this trend isn't consistent or reliable enough to suggest a strong or direct relationship. Other external factors likely influence ticket sales, and Hulu subscription numbers alone cannot fully predict them accurately.
+
+
+
+Here I am calculating the percent change for both Hulu subscriptions and movie theater ticket sales between each year from 2011 to 2019. I'm doing this to observe the year-to-year increases or decreases, identify any significant jumps or drops, and better understand how the trends in both variables compare over time. This helps reveal whether any changes in Hulu growth align with shifts in movie theater attendance. This serves as an additional way to highlight specific points of change that could indicate meaningful patterns or turning points.
+
+## PCT Change
+```{r}
+hulu_theaters <- hulu_theaters %>%
+  arrange(year) %>%
+  mutate(
+    pct_change_hulu_subscribers = (hulu_subscribers - lag(hulu_subscribers)) / lag(hulu_subscribers) * 100,
+    pct_change_mt_tickets = (mt_tickets - lag(mt_tickets)) / lag(mt_tickets) * 100,
+  )
+```
+
+With the addition of these new pct chaneg columns, we can see that while Hulu subscribers increased every year from 2011 to 2019—sometimes significantly, such as the 100% increases in both 2012 and 2013—the number of movie theater tickets sold showed less consistency. Several years saw declines in ticket sales, including noticeable drops of around 6% in both 2014 and 2019. Although there were occasional increases, like the 7.8% rise in 2012 and 7% in 2018, overall the trend for movie ticket sales was more unstable. IN summary, I can say that this contrast suggests while Hulu experienced steady growth and no decreasing numbers at all, movie theater attendance did not follow a fully positive or reliable trend. These fluctuations may point to the growing popularity of streaming services influencing consumer behavior, but we can't assume causation.
+
+
+
+
+Explain what you're doing and why
+Code Block #6
+Find mean of hulu subscribers
+Evaluation of the results
+
+
+Explain what you're doing and why
+Code Block #7
+T-Test
+Evaluation of the results
+
+
+## Story Pitch
+(final section)
+draft a story pitch, backed by your analysis. It needs to discuss your main findings, potential problems, and provide a reporting plan

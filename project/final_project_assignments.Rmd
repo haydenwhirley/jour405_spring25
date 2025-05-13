@@ -81,10 +81,7 @@ hulu_theaters <- hulu_theaters %>%
   arrange(year) %>%
   mutate(
     pct_change_hulu_subscribers = (hulu_subscribers - lag(hulu_subscribers)) / lag(hulu_subscribers) * 100,
-    pct_change_hulu_revenue = (hulu_revenue - lag(hulu_revenue)) / lag(hulu_revenue) * 100,
     pct_change_mt_tickets = (mt_tickets - lag(mt_tickets)) / lag(mt_tickets) * 100,
-    pct_change_mt_revenue = (mt_revenue - lag(mt_revenue)) / lag(mt_revenue) * 100,
-    pct_change_movie_releases = (movie_releases - lag(movie_releases)) / lag(movie_releases) * 100
   )
 ```
 
