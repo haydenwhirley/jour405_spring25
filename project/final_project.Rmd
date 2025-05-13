@@ -1,0 +1,49 @@
+Introduction 
+What my analysis is about
+Hypothesis
+The tests I’ll run 
+Correlation coefficient 
+Scatterplot
+Pct change across years
+Mean 
+T test (look at his comments)
+
+Code Block #1
+Load tidyverse
+
+Code Block #2
+Load data 
+
+Explain what you're doing and why
+Code Block #3
+Correlation coefficient 
+Evaluation of the results
+
+
+Explain what you're doing and why
+Code Block #4
+Scatterplot 
+Evaluation of the results
+
+
+Explain what you're doing and why
+Code Block #5
+Pct change
+Evaluation of the results
+
+
+Explain what you're doing and why
+Code Block #6
+Find mean of hulu subscribers
+Evaluation of the results
+
+
+Explain what you're doing and why
+Code Block #7
+T-Test
+Evaluation of the results
+
+
+Story Pitch (final section)
+draft a story pitch, backed by your analysis. It needs to discuss your main findings, potential problems, and provide a reporting plan
+Movie theaters in the U.S. remained successful pre-covid, despite an increase in the usage of at-home streaming services
