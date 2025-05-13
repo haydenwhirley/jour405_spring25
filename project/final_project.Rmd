@@ -10,6 +10,8 @@ I chose Hulu as a proxy for a leading U.S. streaming service and used a Domestic
 
 I also included numbers from Box Office Mojo/IMDbPro for the number of movie releases each year in my data frame, which can also play a factor in affecting the number of tickets sold and overall box office revenue. To maintain consistency and avoid the distortions caused by the COVID-19 pandemic, I am focusing on data up to 2019—when streaming services had already gained significant popularity.
 
+Movie theaters have been around since ___, while Hulu launched in ____ and become _____.
+
 For my analysis, I will create a scatterplot to visualize the relationship between the variables, calculate the correlation coefficient, analyze the percent change across years, and perform a t-test to assess the statistical significance of the observed trends.
 ##finding a mean & more about the t test
 
@@ -62,7 +64,7 @@ hulu_theaters <- hulu_theaters %>%
   )
 ```
 
-With the addition of these new pct chaneg columns, we can see that while Hulu subscribers increased every year from 2011 to 2019—sometimes significantly, such as the 100% increases in both 2012 and 2013—the number of movie theater tickets sold showed less consistency. Several years saw declines in ticket sales, including noticeable drops of around 6% in both 2014 and 2019. Although there were occasional increases, like the 7.8% rise in 2012 and 7% in 2018, overall the trend for movie ticket sales was more unstable. IN summary, I can say that this contrast suggests while Hulu experienced steady growth and no decreasing numbers at all, movie theater attendance did not follow a fully positive or reliable trend. These fluctuations may point to the growing popularity of streaming services influencing consumer behavior, but we can't assume causation.
+With the addition of these new pct chaneg columns, we can see that while Hulu subscribers increased every year from 2011 to 2019—sometimes significantly, such as the 100% increases in both 2012 and 2013—the number of movie theater tickets sold showed less consistency. Several years saw declines in ticket sales, including noticeable drops of around 6% in both 2014 and 2019. Although there were occasional increases, like the 7.8% rise in 2012 and 7% in 2018, overall the trend for movie ticket sales was more unstable. In summary, I can say that this contrast suggests Hulu experienced steady growth and no decreasing numbers at all, and movie theater attendance did not follow a fully positive or reliable trend. These fluctuations may point to the growing popularity of streaming services influencing consumer behavior, but we can't assume causation.
 
 
 
