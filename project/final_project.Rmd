@@ -1,12 +1,31 @@
 Jour405 Final Project Notes
 Hayden Whirley 
 
+## Final Project
+
+***add csv file into repository
+
+RUBRIC:
+
+Complete submission (all files are in the proper folder) - 10 points
+
+Notebook runs without error (or with errors explained) - 15 points
+
+All code blocks are preceded by some narrative explaining what you're doing and why, and followed by an evaluation of the results - 20 points
+
+Your notebook calculates both descriptive statistics and at least two additional statistical techniques that we've covered this semester - 20 points
+
+You notebook must have at least one visualization of your choice that shows off a finding or result - 10 points
+
+Your notebook must include a final section where you draft a story pitch, backed by your analysis. It needs to discuss your main findings, potential problems, and provide a reporting plan - 25 points
+
 ## Week 13 Assignment: Trials, Errors, and Lessons
 
-In this analysis, I examine the relationship between the success of streaming services and the performance of movie theaters. My hypothesis is that as streaming services have become more successful, movie theaters have experienced a decline. The growing convenience of at-home viewing—offering instant access to movies and TV shows—may be contributing to a measurable decline in theater attendance and revenue.
+In this analysis, I examine the relationship between the success of streaming services and the performance of movie theaters. My hypothesis is that as streaming services have become more successful in recent years, movie theaters have experienced a decline. The growing convenience of at-home viewing—offering instant access to movies and TV shows—may be contributing to a measurable decline in theater attendance and revenue.
 
 I chose Hulu as a proxy for a leading U.S. streaming service and used a Domestic Movie Theatrical Market Summary as my source for box office data. I also included data from Box Office Mojo/IMDbPro for the number of movie releases each year, which can also play a factor in affecting the number of tickets sold and overall box office revenue. To maintain consistency and avoid the distortions caused by the COVID-19 pandemic, I am focusing on data up to 2019—when streaming services had already gained significant popularity.
 
+***edit based on what he said
 For my analysis, I will create a scatterplot to visualize the relationship between the variables, calculate the correlation coefficient, analyze the percent change across years, and perform a t-test to assess the statistical significance of the observed trends.
 
 ## Load the Tidyverse
