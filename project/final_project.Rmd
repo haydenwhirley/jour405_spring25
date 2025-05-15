@@ -9,7 +9,7 @@ I chose Hulu annual reports as a proxy for a U.S. streaming service and used a D
 
 To maintain consistency and avoid the distortions caused by the COVID-19 pandemic, I am focusing on data up to 2019—when streaming services had already gained significant popularity. Movie theaters have been around since the late 19th century, while Hulu launched in 2008 and has become a leading streaming service in the United States. The purpose of this analysis is to determine if streaming service usage has influenced movie-theater going behavior in recent years as technology and convenience have become more prevalent.
 
-For my analysis, I will calculate the correlation coefficient, create a scatterplot to visualize the relationship between the variables, analyze the percent change across years, perform a t-test to assess the statistical significance of the changes in average movie ticket sales, and _____ a multiple regression model to see if my variables can predict eachother.
+For my analysis, I will calculate the correlation coefficient, create a scatterplot to visualize the relationship between the variables, analyze the percent change across years, perform a t-test to assess the statistical significance of the changes in average movie ticket sales, and build linear regression models to see if my variables can predict each other.
 
 
 ## Load the Tidyverse
@@ -64,7 +64,7 @@ hulu_theaters <- hulu_theaters %>%
   )
 ```
 
-With the addition of these new pct chaneg columns, we can see that while Hulu subscribers increased every year from 2011 to 2019—sometimes significantly, such as the 100% increases in both 2012 and 2013—the number of movie theater tickets sold showed less consistency. Several years saw declines in ticket sales, including noticeable drops of around 6% in both 2014 and 2019. Although there were occasional increases, like the 7.8% rise in 2012 and 7% in 2018, overall the trend for movie ticket sales was more unstable. In summary, I can say that this contrast suggests Hulu experienced steady growth and no decreasing numbers at all, and movie theater attendance did not follow a fully positive or reliable trend. These fluctuations may point to the growing popularity of streaming services influencing consumer behavior, but we can't assume causation.
+With the addition of these new pct change columns, we can see that while Hulu subscribers increased every year from 2011 to 2019—sometimes significantly, such as the 100% increases in both 2012 and 2013—the number of movie theater tickets sold showed less consistency. Several years saw declines in ticket sales, including noticeable drops of around 6% in both 2014 and 2019. Although there were occasional increases, like the 7.8% rise in 2012 and 7% in 2018, overall the trend for movie ticket sales was more unstable. In summary, I can say that this contrast suggests Hulu experienced steady growth and no decreasing numbers at all, and movie theater attendance did not follow a fully positive or reliable trend. These fluctuations may point to the growing popularity of streaming services influencing consumer behavior, but we can't assume causation.
 
 
 
@@ -194,7 +194,7 @@ Coefficients: y-intercept: -62,492,588 slope for Movie Releases: -101,540
 
 The y-intercept (-62,492,588) is the predicted number of Hulu subscribers when there are zero movie releases, obviously not realistic, but it's a baseline. The slope (-101,540) means that for each additional movie released, the model predicts about 101,540 fewer Hulu subscribers. This suggests negative relationship, more movies in theaters might correlate with fewer people subscribing to Hulu.
 
-The adjusted R-squared value of 0.7682 is pretty strong, meaning t 76.82% of the variation in Hulu subscribers is explained by the number of movie releases.
+The adjusted R-squared value of 0.7682 is pretty strong, meaning 76.82% of the variation in Hulu subscribers is explained by the number of movie releases.
 
 The p-value of 0.001192 is much smaller than 0.05, so we can conclude that there is a statistically significant relationship between movie releases and Hulu subscribers, and this could be worth exploring further. The model predicts that more movie releases are associated with fewer Hulu subscribers.
 
@@ -202,26 +202,31 @@ The p-value of 0.001192 is much smaller than 0.05, so we can conclude that there
 
 
 ## Story Pitch
-(final section)
-draft a story pitch, backed by your analysis. It needs to discuss your main findings, potential problems, and provide a reporting plan
 
 Main Findings:
-- correlation coefficient showed us that
-- scatterplot let us see 
-- pct change in subscribers and movie theater tickets told us 
-- one sample t-test resulted in
-- multiple regression model 
-
-focus this on how i orginally thought there would be more statically signidcinat realtionship, so my conclusion will reject/counter that
+- The correlation coefficient showed a moderate negative relationship between Hulu subscriptions and movie theater ticket sales (-0.54), suggesting that as Hulu subscriptions tend to increase, movie theater attendance tends to decrease. However, the correlation is not strong enough to suggest a definitive or causal relationship—other factors could also be influencing theater attendance trends.
+- The scatterplot let us see that weak negative relationship between Hulu subscriptions and movie ticket sales. Although there’s a slight downward trend, the wide spread of data points suggests the relationship isn’t strong or consistent. 
+- Looking at the percent change in subscribers and movie theater tickets told us that from 2011 to 2019, Hulu subscriptions grew steadily each year, while movie theater ticket sales fluctuated, highlighting an inconsistent trend that contrasts with streaming’s continuous rise.
+- The t-test showed that although average movie ticket sales were lower in 2015–2019 than in 2011–2014, the difference was not statistically significant, so we cannot conclude a meaningful decline.
+- Of the four linear regression models tested, only the relationship between movie releases and Hulu subscribers was statistically significant and strong, showing that more movie releases are associated with fewer Hulu subscribers, while the other models—examining Hulu subscribers or revenue as predictors of movie theater performance, and movie releases predicting ticket sales—showed weak or non-significant relationships.
 
 
 Reporting Plan:
 
-Story pitch - 
+Story pitch - My original assumption was that the rise of streaming services like Hulu might suggest a sharp decline in movie theater attendance, but my analysis of data from 2011 to 2019 shows that this wasn’t the case. Despite Hulu’s steady growth in subscribers during this period, there was no statistically significant drop in movie ticket sales or revenue — suggesting that the success of streaming didn’t directly or immediately harm theaters before the pandemic. While the widespread theater closures and changes in consumer behavior following COVID-19 may be more notable or newsworthy today, my story focuses on this pre-pandemic period to challenge assumptions and highlight how both industries coexisted more successfully than expected during those years. I should focus on how the take off of streaming services surprisingly did not have a significant impact on movie theater success.
 
-Headline -
-Lede -
+Headline - Streaming’s Rise Didn’t Kill Theaters — At Least Not Before the Pandemic (or something along those lines)
 
-Who I would interview - 
+Lede - In the age of the rise of binge-watching and subscription services, it’s easy to assume that movie theaters were already on the decline — streaming services changed how we watch movies, but they didn’t immediately change where we watch them. Despite the rapid rise of Hulu subscribers in the 2010s, data reveals that movie theaters in the U.S. didn’t experience a significant decline in ticket sales or revenue during that period.
 
-Potential problems - 
+Who I would interview:
+- A long-time movie theater exec/manager/representative - to offer insight into what they've observed regarding attendance trends and their perceptions of streaming competition
+- Hulu representative, or from another streaming service - for context on the platform's growth, and their view of potential competition with theaters
+- A consumer who regularly uses both streaming & movie theaters (or 1 for each side) - to humanize the story with a firsthand media consumption perspectives, what factors are important to them for usage
+- Some sort of entertainment industry analyst or economist - to discuss broader market trends that could affect streaming & theaters/movie industry
+
+Potential problems:
+- The analysis stops at 2019 to avoid COVID-19 distortion, but it doesn't have recent developments like the 2020 streaming boom and the post-pandemic rebound (or lack thereof) in theaters.
+- Hulu is just one platform; services like Netflix or Disney+ may show stronger or different effects. (I would have had to use international movie theater data to compare to Netflix which is an international company, which I was having trouble finding)
+- Linear regression models can’t capture complex consumer decision making or crossover behaviors like people using both streaming and theaters.
+- Industry factors like movie quality/ratings, ticket pricing, and economic trends were not included but could impact both metrics.
