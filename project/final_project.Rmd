@@ -5,20 +5,18 @@ Hayden Whirley
 
 In this analysis, I examine the relationship between the success of streaming services and the performance of movie theaters. My hypothesis is that as streaming services have become more successful, movie theaters have experienced a decline. The growing convenience of at-home viewing—offering instant access to movies and TV shows—may be contributing to a measurable decline in theater attendance and revenue.
 
-I chose Hulu as a proxy for a leading U.S. streaming service and used a Domestic Movie Theatrical Market Summary as my source for box office data. 
-##included hulu subscirbers each year, movie theater tickets sold each year, and revenues for both, as variables to meadure the succes of both these _____.
+I chose Hulu annual reports as a proxy for a U.S. streaming service and used a Domestic Movie Theatrical Market Summary as my source for box office data. I compiled a dataset that includes Hulu subscribers each year, domestic movie theater tickets sold each year, and revenues for both, as variables to measure the success of both these entertainment platforms. I also included data from Box Office Mojo/IMDbPro for the number of movie releases each year, which can also play a factor in affecting the number of tickets sold and overall box office revenue. 
 
-I also included numbers from Box Office Mojo/IMDbPro for the number of movie releases each year in my data frame, which can also play a factor in affecting the number of tickets sold and overall box office revenue. To maintain consistency and avoid the distortions caused by the COVID-19 pandemic, I am focusing on data up to 2019—when streaming services had already gained significant popularity.
+To maintain consistency and avoid the distortions caused by the COVID-19 pandemic, I am focusing on data up to 2019—when streaming services had already gained significant popularity. Movie theaters have been around since the late 19th century, while Hulu launched in 2008 and has become a leading streaming service in the United States. The purpose of this analysis is to determine if streaming service usage has influenced movie-theater going behavior in recent years as technology and convenience have become more prevalent.
 
-Movie theaters have been around since ___, while Hulu launched in ____ and become _____.
-
-For my analysis, I will create a scatterplot to visualize the relationship between the variables, calculate the correlation coefficient, analyze the percent change across years, and perform a t-test to assess the statistical significance of the observed trends.
-##finding a mean & more about the t test
+For my analysis, I will calculate the correlation coefficient, create a scatterplot to visualize the relationship between the variables, analyze the percent change across years, perform a t-test to assess the statistical significance of the changes in average movie ticket sales, and _____ a multiple regression model to see if my variables can predict eachother.
 
 
 ## Load the Tidyverse
 ```{r}
+knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
+options(scipen = 999)
 ```
 
 ## Load My Data
@@ -28,7 +26,7 @@ hulu_theaters <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vTvHY
 
 First, I'm calculating the correlation coefficient to measure the strength and direction of the linear relationship between Hulu subscriptions and movie theater tickets sold each year. This helps me determine whether there's a meaningful connection between the two variables.
 
-## Correlation Coefficient
+## Section 1 - Correlation Coefficient
 ```{r}
 hulu_theaters |> summarize(correlation = cor(hulu_subscribers, mt_tickets, method = "pearson"))
 ```
@@ -39,7 +37,7 @@ This correlation coefficient (-0.54) indicates a moderate negative relationship,
 
 Next, I will create a scatterplot for those same variables to better visualize the relationship between Hulu subscriptions and movie theater ticket sales. This visual representation will help reveal any patterns, trends, or outliers that may not be as clear from the correlation coefficient alone.
 
-## Scatterplot
+## Section 2 - Scatterplot
 ```{r}
 hulu_theaters |>
   ggplot(aes(x = hulu_subscribers, y = mt_tickets)) +
@@ -54,7 +52,9 @@ This scatterplot shows that while there is a slight downward trend—represented
 
 Here I am calculating the percent change for both Hulu subscriptions and movie theater ticket sales between each year from 2011 to 2019. I'm doing this to observe the year-to-year increases or decreases, identify any significant jumps or drops, and better understand how the trends in both variables compare over time. This helps reveal whether any changes in Hulu growth align with shifts in movie theater attendance. This serves as an additional way to highlight specific points of change that could indicate meaningful patterns or turning points.
 
-## PCT Change
+## Section 3 - PCT Change 
+*AI Use
+
 ```{r}
 hulu_theaters <- hulu_theaters %>%
   arrange(year) %>%
@@ -68,19 +68,160 @@ With the addition of these new pct chaneg columns, we can see that while Hulu su
 
 
 
+We know that Hulu subscribers increased every year, but I wanted to confirm whether movie ticket sales changed over the same period. I want to conduct a one-sample t-test to determine whether the average number of movie tickets sold during the later years (2015–2019) was significantly lower than the average during the early years (2011–2014).
 
-Explain what you're doing and why
-Code Block #6
-Find mean of hulu subscribers
-Evaluation of the results
+**Hypotheses:**
+Null: There is no decrease in movie ticket sales in the later years compared to earlier years
+Alternative: Movie ticket sales have decreased in the later years
+
+## Section 4 - T-Test 
+*AI Use
+
+```{r}
+# Filter out early and later periods
+early_tickets <- hulu_theaters %>%
+  filter(year <= 2014) %>%
+  pull(mt_tickets)
+
+later_tickets <- hulu_theaters %>%
+  filter(year > 2014) %>%
+  pull(mt_tickets)
+
+# Set the significance level for your test
+alpha_level <- 0.05 # Replace with the appropriate value
+
+# Perform a one-sample t-test
+# Since we want to know if ticket sales declined (decreased), we use a one-sided test (alternative = "less")
+t_test_result <- t.test(
+  later_tickets,
+  mu = mean(early_tickets),
+  alternative = "less"
+)
+
+# Display the results
+t_test_result
+```
+
+The mean number of tickets sold in the early period was 1,315,562,466, while the mean in the later period was 1,280,447,985. So the mean was lower in the second half of the data by 35,114,481 tickets, which I would say is a notable difference.
+
+However, the results of the t-test had a t statistic of -1.523, meaning the average number of movie tickets sold in the later years is about 1.523 standard errors below the average in the earlier years, showing a moderate decrease relative to the variability in ticket sales.
+
+The p-value is 0.1012. Since the p-value is greater than the significance level of 0.05, about double the amount, we fail to reject the null hypothesis. This means that even though the average ticket sales were lower in the later period, there is not enough statistical evidence to conclude that movie ticket sales significantly declined compared to the earlier years.
 
 
-Explain what you're doing and why
-Code Block #7
-T-Test
-Evaluation of the results
+
+
+## Section 5 - Linear Regression Models
+
+
+# First: Can hulu subscribers predict movie theater tickets sold?
+
+```{r}
+# Fit a simple linear regression model
+model <- lm(mt_tickets ~ hulu_subscribers, data = hulu_theaters)
+
+# View the model summary
+summary(model)
+```
+P-value: 0.1308
+Adjusted R-squared value: 0.1941
+Coefficients: y-intercept: 1,332,661,684 slope for Hulu Subscribers: -3.328
+
+The y-intercept (1,332,661,684) represents the predicted number of movie theater tickets sold when there are zero Hulu subscribers. The slope (-3.328) means that for every additional Hulu subscriber, the model predicts about 3.33 fewer movie tickets sold. This suggests a negative relationship, for example, more Hulu subscribers might be associated with fewer movie tickets sold. 
+
+The adjusted R-squared of 0.1941 means that only 19.41% of the variation in movie ticket sales can be explained by the number of Hulu subscribers. So about 80.59% of the variation is due to other factors, not captured by this model. So, this is a weak model.
+
+Since 0.1308 > 0.05, we fail to reject the null hypothesis. This means the negative relationship is not statistically significant — we do not have strong enough evidence to conclude that Hulu subscribers meaningfully predict movie ticket sales.
+
+
+# Second: Can Hulu revenue predict movie theater revenue?
+
+```{r}
+# Fit a simple linear regression model
+model <- lm(mt_revenue ~ hulu_revenue, data = hulu_theaters)
+
+# View the model summary
+summary(model)
+```
+
+P-value: 0.06452
+Adjusted R-squared value: 0.3222
+Coefficients: y-intercept: 10,473,582,009 slope for Hulu Revenue: 0.2492
+
+The y-intercept ($10,473,582,009) is the baseline predicted movie theater revenue when Hulu revenue is $0. The slope (0.2492) means that for every additional $1 in Hulu revenue, the model predicts an increase of about $0.25 in movie theater revenue. So there's a positive relationship — higher Hulu revenue is associated with higher movie theater revenue in this model. 
+
+The adjusted R-squared of 0.3222 means that about 32.22% of the variation in movie theater revenue is explained by Hulu revenue. While not super strong, it can be considered moderate.
+
+This p-value of 0.06452 is just above the common 0.05 threshold. That means the result is not quite statistically significant, but it's close.
+
+
+
+# Third: Can movie releases predict movie theater tickets sold?
+
+```{r}
+# Fit a simple linear regression model
+model <- lm(mt_tickets ~ movie_releases, data = hulu_theaters)
+
+# View the model summary
+summary(model)
+```
+
+P-value: 0.4993
+Adjusted R-squared value: -0.06561
+Coefficients: y-intercept: 1,427,206,055 slope for Movie Releases: -181,204
+
+The y-intercept (1,427,206,055) represents the estimated number of tickets sold when there are 0 movie releases. The slope (-181,204) means that for each additional movie released, the model predicts a decrease of about 181,204 movie tickets sold. That’s a negative relationship, which is odd.
+
+The adjusted R-squared here of -0.06561 means this model doesn’t explain any meaningful variation in the data and is not useful for prediction.
+
+Lastly, the p-value of 0.4993 is very high, which means there's no statistically significant evidence that the number of movie releases has any predictive power for ticket sales.
+
+
+
+# Fourth: Can movie releases predict Hulu subscribers?
+
+```{r}
+# Fit a simple linear regression model
+model <- lm(hulu_subscribers ~ movie_releases, data = hulu_theaters)
+
+# View the model summary
+summary(model)
+```
+
+P-value: 0.001192
+Adjusted R-squared value: 0.7682
+Coefficients: y-intercept: -62,492,588 slope for Movie Releases: -101,540
+
+The y-intercept (-62,492,588) is the predicted number of Hulu subscribers when there are zero movie releases, obviously not realistic, but it's a baseline. The slope (-101,540) means that for each additional movie released, the model predicts about 101,540 fewer Hulu subscribers. This suggests negative relationship, more movies in theaters might correlate with fewer people subscribing to Hulu.
+
+The adjusted R-squared value of 0.7682 is pretty strong, meaning t 76.82% of the variation in Hulu subscribers is explained by the number of movie releases.
+
+The p-value of 0.001192 is much smaller than 0.05, so we can conclude that there is a statistically significant relationship between movie releases and Hulu subscribers, and this could be worth exploring further. The model predicts that more movie releases are associated with fewer Hulu subscribers.
+
+
 
 
 ## Story Pitch
 (final section)
 draft a story pitch, backed by your analysis. It needs to discuss your main findings, potential problems, and provide a reporting plan
+
+Main Findings:
+- correlation coefficient showed us that
+- scatterplot let us see 
+- pct change in subscribers and movie theater tickets told us 
+- one sample t-test resulted in
+- multiple regression model 
+
+focus this on how i orginally thought there would be more statically signidcinat realtionship, so my conclusion will reject/counter that
+
+
+Reporting Plan:
+
+Story pitch - 
+
+Headline -
+Lede -
+
+Who I would interview - 
+
+Potential problems - 
